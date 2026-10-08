@@ -1,0 +1,411 @@
+/* ============================================================
+   學會網站 — 共用樣式表 / Shared stylesheet
+   色板 Color tokens: 深空藍 Navy / 紫 Purple / 青 Teal / 薄荷 Mint
+   ============================================================ */
+
+:root {
+  --navy: #02153D;
+  --purple: #4B227A;
+  --teal: #0197AF;
+  --mint: #00EED0;
+
+  --ink: #0B1324;
+  --paper: #F6F7FB;
+  --line: rgba(2, 21, 61, 0.12);
+  --line-dark: rgba(255, 255, 255, 0.14);
+
+  --font-head-zh: "Noto Serif TC", serif;
+  --font-head-en: "Space Grotesk", sans-serif;
+  --font-body-zh: "Noto Sans TC", sans-serif;
+  --font-body-en: "Inter", sans-serif;
+
+  --radius: 4px;
+  --max-width: 1040px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body-zh), var(--font-body-en);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head-zh), var(--font-head-en);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 0.5em;
+  color: var(--navy);
+}
+
+p { margin: 0 0 1em; }
+
+a { color: var(--teal); }
+a:hover { color: var(--purple); }
+
+img { max-width: 100%; display: block; }
+
+/* 語言切換 / Language toggle ------------------------------------ */
+/* 預設顯示中文；<html data-lang="en"> 時切換為英文。
+   注意：用 data-lang 屬性而非 class，避免跟下方 .lang-zh / .lang-en
+   文字用的 class 同名衝突（曾導致 <body> 本身被隱藏、整頁變白屏）。 */
+.lang-en { display: none; }
+html[data-lang="en"] .lang-en { display: inline; }
+html[data-lang="en"] .lang-zh { display: none; }
+
+/* 區塊容器 / Section container ----------------------------------- */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 頁首 / Header --------------------------------------------------- */
+.site-header {
+  background: var(--navy);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--font-head-zh), var(--font-head-en);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-right: auto;
+}
+
+/* <!-- TODO: 學會標誌 Logo 圖片位置。
+     建議尺寸 40x40px 左右，例如：
+     <img src="logo.png" alt="學會標誌" width="36" height="36">
+     放在 .logo 連結內、文字之前 --> */
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--teal) 55%, var(--mint));
+  flex-shrink: 0;
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.main-nav a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+}
+
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: var(--font-body-en);
+  letter-spacing: 0.02em;
+}
+.lang-toggle:hover { border-color: var(--mint); color: var(--mint); }
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    flex-direction: column;
+    padding: 8px 24px 16px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .main-nav.open { display: flex; }
+  .nav-toggle { display: block; }
+}
+
+/* 英雄區 / Hero ----------------------------------------------------- */
+.hero {
+  background: var(--navy);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 96px;
+}
+
+.hero-wave {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 160px;
+  opacity: 0.6;
+}
+
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  max-width: 14em;
+  letter-spacing: -0.01em;
+}
+
+.hero p {
+  color: rgba(255,255,255,0.78);
+  max-width: 42em;
+  font-size: 1.05rem;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--mint);
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: var(--radius);
+}
+.cta:hover { background: #fff; color: var(--navy); }
+
+/* 區塊標題 / Section heading ---------------------------------------- */
+.section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  border-left: 3px solid var(--teal);
+  padding-left: 14px;
+}
+
+.section-head h2 { margin: 0; }
+
+/* 三欄導覽卡 / Highlight links on homepage -------------------------- */
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.highlight-card {
+  background: var(--paper);
+  padding: 28px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.highlight-card h3 {
+  color: var(--navy);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.highlight-card h3::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.highlight-card:hover h3::before { background: var(--purple); }
+.highlight-card p { color: #45506b; font-size: 0.95rem; margin: 0; }
+
+/* 成員卡片 / Member grid --------------------------------------------- */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.member-card {
+  border: 1px solid var(--line);
+  padding: 20px;
+}
+
+.member-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, var(--purple), var(--teal));
+  margin-bottom: 14px;
+  /* <!-- TODO: 成員照片位置。可改用
+       <img src="members/xxx.jpg" alt="姓名"> 取代這個 div --> */
+}
+
+.member-card h3 { margin-bottom: 2px; font-size: 1rem; }
+.member-card .role { color: var(--purple); font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; }
+.member-card .profession { color: #6b7490; font-size: 0.82rem; margin-bottom: 0; }
+
+/* 新聞列表 / News list ------------------------------------------------ */
+.news-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.news-item:first-child { padding-top: 0; }
+.news-date {
+  font-family: var(--font-body-en);
+  font-size: 0.82rem;
+  color: var(--teal);
+  letter-spacing: 0.02em;
+}
+.news-item h3 { margin: 4px 0 6px; font-size: 1.1rem; }
+
+/* 新聞標題連結 / News item as PDF link ------------------------------- */
+.news-link {
+  text-decoration: none;
+  display: block;
+}
+.news-link h3 {
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.news-link h3::after {
+  content: "↗";
+  font-size: 0.8em;
+  color: var(--teal);
+}
+.news-link:hover h3 {
+  color: var(--purple);
+}
+.news-link:hover h3::after {
+  color: var(--purple);
+}
+
+/* 聯絡表單 / Contact form ---------------------------------------------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+}
+@media (max-width: 760px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--navy);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.submit-btn {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 11px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.submit-btn:hover { background: var(--purple); }
+
+.info-block { border-left: 3px solid var(--mint); padding-left: 16px; }
+.info-block h3 { font-size: 1rem; margin-bottom: 4px; }
+.info-block p { color: #45506b; font-size: 0.95rem; }
+
+/* 頁尾 / Footer --------------------------------------------------------- */
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.65);
+  padding: 32px 0;
+  font-size: 0.85rem;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.site-footer a { color: rgba(255,255,255,0.75); }
+
+/* 減少動態效果偏好 / Reduced motion -------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* 鍵盤可視焦點 / Visible focus ------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
