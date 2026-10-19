@@ -507,7 +507,7 @@
   }
 
   /* ---------- 聯絡表單（沒有後端：整理內容後開啟使用者的郵件程式）---------- */
-  var CONTACT_TO = 'inquiry.mmpa@gmail.com';
+  var CONTACT_TO = 'medicalphysics.macau@gmail.com';
 
   function initContact() {
     var form = $('#contact-form');
