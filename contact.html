@@ -13,20 +13,38 @@
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="logo">
-      <img src="images/logo.png" alt="學會標誌" width="36" height="36">
+      <img src="images/logo.png" alt="學會標誌" width="32" height="32">
       <span class="lang-zh">澳門醫學物理學會</span>
       <span class="lang-en">Macau Medical Physics Association</span>
     </a>
-    <nav class="main-nav" id="main-nav">
+    <div class="header-tools">
+      <form class="site-search" id="site-search" role="search" autocomplete="off">
+        <input type="search" id="search-input" placeholder="搜尋網站" data-ph-zh="搜尋網站" data-ph-en="Search" aria-label="Search" aria-controls="search-results">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </form>
+      <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
+      <a class="icon-btn" href="mailto:inquiry.mmpa@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+      <!-- TODO: 把 href="#" 換成學會的 Facebook 專頁網址 -->
+      <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+    </div>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Main">
+    <div class="nav-inner">
       <a href="index.html"><span class="lang-zh">首頁</span><span class="lang-en">Home</span></a>
-      <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
-      <a href="members.html"><span class="lang-zh">組織架構</span><span class="lang-en">Organization</span></a>
+      <div class="nav-item">
+        <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
+        <div class="subnav">
+          <a href="about.html#intro"><span class="lang-zh">本會簡介</span><span class="lang-en">About the Association</span></a>
+          <a href="about.html#constitution"><span class="lang-zh">章程</span><span class="lang-en">Constitution</span></a>
+          <a href="about.html#structure"><span class="lang-zh">行政架構</span><span class="lang-en">Organization</span></a>
+        </div>
+      </div>
       <a href="news.html"><span class="lang-zh">最新消息</span><span class="lang-en">News</span></a>
       <a href="contact.html" aria-current="page"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
-    </nav>
-    <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button>
-    <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <main>
@@ -34,18 +52,63 @@
     <div class="wrap">
       <div class="section-head">
         <h2><span class="lang-zh">聯絡我們</span><span class="lang-en">Get in touch</span></h2>
-      
       </div>
-    <h3><span class="lang-zh">電郵</span><span class="lang-en">Email</span></h3>
-        <ul>
-          <li>inquiry.mmpa@gmail.com </li>
-          <li>medicalphysics.macau@gmail.com </li>
-        </ul>
-        <br>
     </div>
   </section>
 
+  <section class="section">
+    <div class="wrap contact-grid">
 
+      <!-- 左：學會資訊 -->
+      <div class="contact-info">
+        <div class="contact-brand">
+          <span class="contact-logo"><img src="images/logo2.png" alt="學會標誌"></span>
+        </div>
+
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          <div>
+            <h3><span class="lang-zh">電話</span><span class="lang-en">Phone</span></h3>
+            <!-- TODO: 草圖上的號碼只是示意，請換成學會的實際聯絡電話 -->
+            <p>853-XXXX-XXXX</p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+          <div>
+            <h3><span class="lang-zh">電郵</span><span class="lang-en">Email</span></h3>
+            <ul>
+              <li><a href="mailto:inquiry.mmpa@gmail.com">inquiry.mmpa@gmail.com</a></li>
+              <li><a href="mailto:medicalphysics.macau@gmail.com">medicalphysics.macau@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：聯絡表單。網站沒有後端，按「提交」會用訪客的郵件程式開啟一封寫好的信（收件人 inquiry.mmpa@gmail.com）-->
+      <form id="contact-form" class="contact-form">
+        <div class="field">
+          <label for="c-name"><span class="lang-zh">您的姓名</span><span class="lang-en">Your name</span></label>
+          <input type="text" id="c-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-email"><span class="lang-zh">郵件</span><span class="lang-en">Email</span></label>
+          <input type="email" id="c-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="c-message"><span class="lang-zh">訊息</span><span class="lang-en">Message</span></label>
+          <textarea id="c-message" name="message" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn"><span class="lang-zh">提交</span><span class="lang-en">Submit</span></button>
+        <p class="form-note" id="form-note-sent" hidden>
+          <span class="lang-zh">已開啟您的郵件程式，請在其中按「傳送」完成。若沒有自動開啟，請直接來信至 inquiry.mmpa@gmail.com。</span>
+          <span class="lang-en">Your email app should now be open with the message ready — please press Send there. If nothing opened, write to inquiry.mmpa@gmail.com directly.</span>
+        </p>
+      </form>
+
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -55,6 +118,7 @@
   </div>
 </footer>
 
+<script src="news-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>澳門醫學物理學會MMPA — 首頁 Home</title>
-<meta name="description" content="學會官方網站">
+<meta name="description" content="澳門醫學物理學會官方網站">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500&family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -18,19 +18,86 @@
       <span class="lang-zh">澳門醫學物理學會</span>
       <span class="lang-en">Macau Medical Physics Association</span>
     </a>
-    <nav class="main-nav" id="main-nav">
+    <div class="header-tools">
+      <form class="site-search" id="site-search" role="search" autocomplete="off">
+        <input type="search" id="search-input" placeholder="搜尋網站" data-ph-zh="搜尋網站" data-ph-en="Search" aria-label="Search" aria-controls="search-results">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </form>
+      <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
+      <a class="icon-btn" href="mailto:inquiry.mmpa@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+      <!-- TODO: 把 href="#" 換成學會的 Facebook 專頁網址 -->
+      <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+    </div>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Main">
+    <div class="nav-inner">
       <a href="index.html" aria-current="page"><span class="lang-zh">首頁</span><span class="lang-en">Home</span></a>
-      <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
-      <a href="members.html"><span class="lang-zh">組織架構</span><span class="lang-en">Organization</span></a>
+      <div class="nav-item">
+        <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
+        <div class="subnav">
+          <a href="about.html#intro"><span class="lang-zh">本會簡介</span><span class="lang-en">About the Association</span></a>
+          <a href="about.html#constitution"><span class="lang-zh">章程</span><span class="lang-en">Constitution</span></a>
+          <a href="about.html#structure"><span class="lang-zh">行政架構</span><span class="lang-en">Organization</span></a>
+        </div>
+      </div>
       <a href="news.html"><span class="lang-zh">最新消息</span><span class="lang-en">News</span></a>
       <a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
-    </nav>
-    <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button>
-    <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <main>
+  <!-- 輪播：換圖請改各 <img src>；每張圖對應下方 .cap 的說明（順序一致）-->
+  <section class="carousel" aria-roledescription="carousel" aria-label="活動照片 Photos">
+    <div class="wrap">
+      <div class="carousel-stage">
+        <div class="slide ph is-active">
+          <span class="ph-label"><span class="lang-zh">成立典禮</span><span class="lang-en">Inauguration</span></span>
+          <img src="images/carousel/opening.jpg" alt="" data-fallback>
+        </div>
+        <div class="slide ph" aria-hidden="true">
+          <span class="ph-label"><span class="lang-zh">講座</span><span class="lang-en">Lecture</span></span>
+          <img src="images/carousel/talk.jpg" alt="" data-fallback>
+        </div>
+        <div class="slide ph" aria-hidden="true">
+          <span class="ph-label"><span class="lang-zh">座談</span><span class="lang-en">Forum</span></span>
+          <img src="images/carousel/forum.jpg" alt="" data-fallback>
+        </div>
+
+        <button type="button" class="carousel-btn carousel-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="carousel-btn carousel-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="carousel-dots"></div>
+      </div>
+
+      <div class="carousel-captions">
+        <div class="cap is-active">
+          <p class="cap-title"><span class="lang-zh">成立典禮</span><span class="lang-en">Inauguration ceremony</span></p>
+          <p>
+            <span class="lang-zh">2026 年 9 月 20 日，澳門醫學物理學會舉行成立典禮。</span>
+            <span class="lang-en">The Association's inauguration ceremony was held on 20 September 2026.</span>
+          </p>
+        </div>
+        <div class="cap">
+          <p class="cap-title"><span class="lang-zh">專題講座</span><span class="lang-en">Lectures</span></p>
+          <p>
+            <span class="lang-zh">定期舉辦專題講座與臨床技能工作坊，促進專業交流與持續進修。</span>
+            <span class="lang-en">Regular thematic lectures and clinical skills workshops for professional exchange and continuing education.</span>
+          </p>
+        </div>
+        <div class="cap">
+          <p class="cap-title"><span class="lang-zh">學術座談</span><span class="lang-en">Academic forums</span></p>
+          <p>
+            <span class="lang-zh">舉辦「澳門放射治療及醫學物理論壇」，推動本地及跨地區的學術研討與交流。</span>
+            <span class="lang-en">The Macau Radiotherapy and Medical Physics Forum fosters academic discussion and exchange, locally and across regions.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 標誌＋格言 -->
   <section class="hero">
     <svg class="hero-wave" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,100 C150,20 300,180 450,100 C600,20 750,180 900,100 C1050,20 1150,140 1200,100 L1200,160 L0,160 Z"
@@ -43,56 +110,37 @@
         </linearGradient>
       </defs>
     </svg>
-    <div class="hero-inner">
-      <h1>
-        <span class="lang-zh">格物致知，學理彰醫</span>
-        <span class="lang-en">Explore nature to know, master physics to heal</span>
-      </h1>
-      <p>
-        <span class="lang-zh">澳門醫學物理學會致力於推廣醫學物理的應用與研究，並普及輻射防護與安全知識。
-          我們面向醫學物理、放射科學、醫學工程等領域的從業人員及學習者，透過舉辦學術研討、繼續教育培訓、刊物出版與對外交流，同時提供輻射安全諮詢，持續提升本地專業水平與服務質量。</span>
-        <span class="lang-en">The Macau Medical Physics Association advances research and application in medical physics while furthering public and professional understanding of radiation safety. 
-          We serve clinicians, engineers, researchers, and trainees across medical physics, radiology, and allied health fields. 
-          Through academic symposia, continuing education, professional publications, cross-border collaborations, and radiation safety consulting, the Association supports high standards of practice throughout Macao.</span>
-      </p>
-      <a class="cta" href="about.html">
-        <span class="lang-zh">了解更多</span>
-        <span class="lang-en">Learn more</span>
-      </a>
+    <div class="hero-inner hero-grid">
+      <img class="hero-logo" src="images/logo.png" alt="學會標誌" width="180" height="180">
+      <div>
+        <h1>
+          <span class="lang-zh">格物致知，學理彰醫</span>
+          <span class="lang-en">Explore nature to know, master physics to heal</span>
+        </h1>
+        <p>
+          <span class="lang-zh">本會屬非牟利社團，致力於推廣醫學物理的應用與研究，並普及輻射防護與安全知識。
+            我們面向醫學物理、放射科學、醫學工程等領域的從業人員及學習者，透過舉辦學術研討、繼續教育培訓、刊物出版與對外交流，同時提供輻射安全諮詢，持續提升本地專業水平與服務質量。</span>
+          <span class="lang-en">The Macau Medical Physics Association is a non-profit organization that advances research and application in medical physics while furthering public and professional understanding of radiation safety.
+            We serve clinicians, engineers, researchers, and trainees across medical physics, radiology, and allied health fields.
+            Through academic symposia, continuing education, professional publications, cross-border collaborations, and radiation safety consulting, the Association supports high standards of practice throughout Macao.</span>
+        </p>
+        <div class="cta-row">
+          <a class="cta" href="about.html"><span class="lang-zh">了解更多</span><span class="lang-en">Learn more</span></a>
+          <a class="cta cta-outline" href="contact.html?topic=join"><span class="lang-zh">加入會員</span><span class="lang-en">Join us</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- 最新消息及活動：資料來自 news-data.js，顯示最新 3 則 -->
   <section class="section">
     <div class="wrap">
-      <div class="highlights">
-        <a class="highlight-card" href="about.html">
-          <h3><span class="lang-zh">關於我們</span><span class="lang-en">About us</span></h3>
-          <p>
-            <span class="lang-zh">學會的成立宗旨、歷史與服務範圍。</span>
-            <span class="lang-en">Our mission, history, and scope of work.</span>
-          </p>
-        </a>
-        <a class="highlight-card" href="members.html">
-          <h3><span class="lang-zh">成員架構</span><span class="lang-en">Membership Structure</span></h3>
-          <p>
-            <span class="lang-zh">認識現任成員與職務分工。</span>
-            <span class="lang-en">Meet the current members and their roles.</span>
-          </p>
-        </a>
-        <a class="highlight-card" href="news.html">
-          <h3><span class="lang-zh">最新消息</span><span class="lang-en">Latest news</span></h3>
-          <p>
-            <span class="lang-zh">活動公告、研討會與學會動態。</span>
-            <span class="lang-en">Events, seminars, and announcements.</span>
-          </p>
-        </a>
-        <a class="highlight-card" href="contact.html">
-          <h3><span class="lang-zh">聯絡我們</span><span class="lang-en">Get in touch</span></h3>
-          <p>
-            <span class="lang-zh">查詢、合作或入會申請。</span>
-            <span class="lang-en">Inquiries, partnerships, or membership.</span>
-          </p>
-        </a>
+      <div class="section-head">
+        <h2><span class="lang-zh">最新消息及活動</span><span class="lang-en">News &amp; events</span></h2>
+        <a class="more-link" href="news.html"><span class="lang-zh">查看全部 →</span><span class="lang-en">View all →</span></a>
+      </div>
+      <div id="home-news" data-limit="3">
+        <noscript><p><a href="news.html">最新消息 / News →</a></p></noscript>
       </div>
     </div>
   </section>
@@ -105,6 +153,7 @@
   </div>
 </footer>
 
+<script src="news-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

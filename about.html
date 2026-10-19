@@ -17,16 +17,34 @@
       <span class="lang-zh">澳門醫學物理學會</span>
       <span class="lang-en">Macau Medical Physics Association</span>
     </a>
-    <nav class="main-nav" id="main-nav">
+    <div class="header-tools">
+      <form class="site-search" id="site-search" role="search" autocomplete="off">
+        <input type="search" id="search-input" placeholder="搜尋網站" data-ph-zh="搜尋網站" data-ph-en="Search" aria-label="Search" aria-controls="search-results">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </form>
+      <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
+      <a class="icon-btn" href="mailto:inquiry.mmpa@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+      <!-- TODO: 把 href="#" 換成學會的 Facebook 專頁網址 -->
+      <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+    </div>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Main">
+    <div class="nav-inner">
       <a href="index.html"><span class="lang-zh">首頁</span><span class="lang-en">Home</span></a>
-      <a href="about.html" aria-current="page"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
-      <a href="members.html"><span class="lang-zh">組織架構</span><span class="lang-en">Organization</span></a>
+      <div class="nav-item">
+        <a href="about.html" aria-current="page"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
+        <div class="subnav">
+          <a href="about.html#intro"><span class="lang-zh">本會簡介</span><span class="lang-en">About the Association</span></a>
+          <a href="about.html#constitution"><span class="lang-zh">章程</span><span class="lang-en">Constitution</span></a>
+          <a href="about.html#structure"><span class="lang-zh">行政架構</span><span class="lang-en">Organization</span></a>
+        </div>
+      </div>
       <a href="news.html"><span class="lang-zh">最新消息</span><span class="lang-en">News</span></a>
       <a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
-    </nav>
-    <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button>
-    <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <main>
@@ -40,54 +58,233 @@
 
   <section class="section">
     <div class="wrap">
-      <h3><span class="lang-zh">宗旨</span><span class="lang-en">Our mission</span></h3>
-      <p>
-        <ol class="chinese-list">
+
+      <!-- 分頁籤：網址可直接指定，例如 about.html#structure 會打開「行政架構」 -->
+      <div class="tabs" role="tablist" aria-label="About">
+        <a class="tab" role="tab" href="#intro" id="tab-intro" data-tab="intro" aria-controls="panel-intro" aria-selected="true"><span class="lang-zh">本會簡介</span><span class="lang-en">About the Association</span></a>
+        <a class="tab" role="tab" href="#constitution" id="tab-constitution" data-tab="constitution" aria-controls="panel-constitution" aria-selected="false" tabindex="-1"><span class="lang-zh">章程</span><span class="lang-en">Constitution</span></a>
+        <a class="tab" role="tab" href="#structure" id="tab-structure" data-tab="structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1"><span class="lang-zh">行政架構</span><span class="lang-en">Organization</span></a>
+      </div>
+
+      <!-- ========== 本會簡介 ========== -->
+      <div class="tab-panel prose" id="panel-intro" role="tabpanel" aria-labelledby="tab-intro">
+
+        <!-- 團體照：放入 images/about/group.jpg（建議橫幅，約 16:6） -->
+        <div class="ph ph--group">
+          <span class="ph-label"><span class="lang-zh">團體照</span><span class="lang-en">Group photo</span></span>
+          <img src="images/about/group.jpg" alt="" data-fallback>
+        </div>
+
+        <div class="sub-head"><h3><span class="lang-zh">簡介</span><span class="lang-en">Introduction</span></h3></div>
+        <div class="lang-zh">
+          <p>澳門醫學物理學會（MMPA）為非牟利學術團體，由本澳從事放射治療、醫學影像及核醫學工作的醫學物理師與放射師共同發起，於 2024 年 9 月 19 日正式登記成立。</p>
+          <p>澳門醫學物理的發展始於 2003 年鏡湖醫院放射治療中心的啟用，結束了過往本澳癌症患者必須遠赴外地就醫的歷史；隨著 2024 年離島醫療綜合體（協和澳門醫學中心）投入服務，本澳正式邁入雙放療中心與引進國際前沿技術的新階段。為凝聚本地從業人員力量、對標國際專業標準，學會應運而生。學會的創立，標誌著澳門醫學物理邁向組織化與規範化發展的里程碑，致力於建構完善的本地專業體系，守護每一次放射治療的安全與精準。</p>
+        </div>
+        <div class="lang-en">
+          <p>The Macau Medical Physics Association (MMPA) is a non-profit academic organization founded jointly by medical physicists and radiographers working in radiotherapy, medical imaging and nuclear medicine in Macau. It was formally registered on 19 September 2024.</p>
+          <p>Medical physics in Macau began with the opening of the Radiotherapy Centre at Kiang Wu Hospital in 2003, which ended the era in which local cancer patients had to travel abroad for treatment. With the Islands Medical Complex (Macau Union Medical Centre) entering service in 2024, Macau has moved into a new stage with two radiotherapy centres and internationally advanced technology. The Association was founded to bring local practitioners together and to align with international professional standards. Its creation marks a milestone in the organized and standardized development of medical physics in Macau, as it works to build a sound local professional system and safeguard the safety and precision of every radiotherapy treatment.</p>
+        </div>
+
+        <div class="sub-head"><h3><span class="lang-zh">成立宗旨</span><span class="lang-en">Our mission</span></h3></div>
+        <ol class="lang-zh">
           <li>在澳門地區推廣有關醫學物理的應用及研究；</li>
           <li>提升澳門地區從事放射工作的醫療人員在醫學物理的專業水平；</li>
           <li>運用醫學物理專業知識，提升公眾及相關專業人員對輻射防護與安全的認知；</li>
           <li>與澳門地區以外的學會及相關團體進行學術研討和交流。</li>
         </ol>
-        <span class="lang-en">Describe the society's founding mission and core values here — for example, advancing the discipline, fostering professional exchange, or establishing industry standards.</span>
-      </p>
-
-      <h3 style="margin-top:36px;"><span class="lang-zh">歷史</span><span class="lang-en">History</span></h3>
-      <p>
-        <span class="lang-zh">澳門醫學物理的發展始於 2003 年鏡湖醫院放射治療中心的啟用，結束了過往本澳癌症患者必須遠赴外地就醫的歷史；
-          隨著 2024 年離島醫療綜合體（協和澳門醫學中心）投入服務，本澳正式邁入雙放療中心與引進國際前沿技術的新階段。
-          為凝聚本地從業人員力量、對標國際專業標準，澳門醫學物理學會（MMPA）於 2024 年 9 月 19 日正式登記成立。
-          學會的創立，標誌著澳門醫學物理邁向組織化與規範化發展的里程碑，致力於建構完善的本地專業體系，守護每一次放射治療的安全與精準。
-        </span>
-        <span class="lang-en">A brief history of the society's founding and key milestones.</span>
-      </p>
-
-      <h3 style="margin-top:36px;"><span class="lang-zh">服務範圍</span><span class="lang-en">What we do</span></h3>
-      <p>
-        <span class="lang-zh">學會以促進醫學物理專業發展、提升醫療服務質量與輻射安全為宗旨，主要工作包含：</span>
-        <ol>
-          <li>
-            <strong>學術交流與專業培訓：</strong>定期舉辦「澳門放射治療及醫學物理論壇」、專題講座與臨床技能工作坊，並推動系統化的輻射防護證書課程與 CPD 學分申請，持續提升本澳從業人員專業水平。
-          </li>
-          <li>
-            <strong>業界交流與專業認可：</strong>加強與大灣區及國際醫學物理團體的合作與參訪，同時積極向政府相關部門提出倡議，推動醫學物理師納入本澳法定醫療專業人員註冊體系。
-          </li>
-          <li>
-            <strong>社區科普與人才育成：</strong>深耕校園與社區，透過科普講座、職涯推廣及發行官方會刊《追光》，增進大眾對醫療輻射與醫學物理專業的認識，為本澳培育並儲備未來專業人才。
-          </li>
+        <ol class="lang-en">
+          <li>To promote the application of, and research in, medical physics in Macau;</li>
+          <li>To raise the professional level in medical physics of medical staff in Macau engaged in radiation work;</li>
+          <li>To apply medical physics expertise to improve public and professional awareness of radiation protection and safety;</li>
+          <li>To hold academic discussions and exchanges with societies and organizations outside Macau.</li>
         </ol>
-        <span class="lang-en">Outline the society's main activities — seminars, publications, professional certification, academic exchange, and so on.</span>
-      </p>
+
+        <!-- TODO: 「發展目標」依據學會既有的宗旨與服務範圍整理而成，請依學會實際規劃修訂 -->
+        <div class="sub-head"><h3><span class="lang-zh">發展目標</span><span class="lang-en">Development goals</span></h3></div>
+        <ol class="lang-zh">
+          <li>推動醫學物理專業在澳門的發展，建構完善的本地專業體系；</li>
+          <li>促進跨地區學術交流，加強與大灣區及國際醫學物理團體的合作；</li>
+          <li>培育專業人才，鼓勵更多澳門青年投身醫學物理事業；</li>
+          <li>深化與相關學科的合作；</li>
+          <li>推動醫學物理師納入本澳法定醫療專業人員註冊體系。</li>
+        </ol>
+        <ol class="lang-en">
+          <li>To advance the professional development of medical physics in Macau and build a sound local professional system;</li>
+          <li>To promote cross-regional academic exchange and strengthen cooperation with Greater Bay Area and international medical physics organizations;</li>
+          <li>To cultivate professional talent and encourage more young people in Macau to pursue careers in medical physics;</li>
+          <li>To deepen collaboration with related disciplines;</li>
+          <li>To promote the inclusion of medical physicists in Macau's statutory healthcare professional registration system.</li>
+        </ol>
+
+        <div class="sub-head"><h3><span class="lang-zh">主要會務</span><span class="lang-en">What we do</span></h3></div>
+        <div class="lang-zh">
+          <p>學會以促進醫學物理專業發展、提升醫療服務質量與輻射安全為宗旨，主要工作包含：</p>
+          <ol>
+            <li><strong>學術交流與專業培訓：</strong>定期舉辦「澳門放射治療及醫學物理論壇」、專題講座與臨床技能工作坊，並推動系統化的輻射防護證書課程與 CPD 學分申請，持續提升本澳從業人員專業水平。</li>
+            <li><strong>業界交流與專業認可：</strong>加強與大灣區及國際醫學物理團體的合作與參訪，同時積極向政府相關部門提出倡議，推動醫學物理師納入本澳法定醫療專業人員註冊體系。</li>
+            <li><strong>社區科普與人才育成：</strong>深耕校園與社區，透過科普講座、職涯推廣及發行官方會刊《追光》，增進大眾對醫療輻射與醫學物理專業的認識，為本澳培育並儲備未來專業人才。</li>
+          </ol>
+        </div>
+        <div class="lang-en">
+          <p>Guided by its aims of advancing the medical physics profession and improving the quality and radiation safety of healthcare services, the Association's main work includes:</p>
+          <ol>
+            <li><strong>Academic exchange and professional training:</strong> regularly organizing the Macau Radiotherapy and Medical Physics Forum, thematic lectures and clinical skills workshops, and promoting systematic radiation protection certificate courses and CPD credit applications, to keep raising the professional standard of local practitioners.</li>
+            <li><strong>Professional exchange and recognition:</strong> strengthening cooperation and visits with Greater Bay Area and international medical physics organizations, while actively advocating to the relevant government departments for the inclusion of medical physicists in Macau's statutory healthcare professional registration system.</li>
+            <li><strong>Community outreach and talent development:</strong> engaging schools and the community through science-popularization talks, career promotion and the Association's official newsletter <em>Zhui Guang</em> (《追光》), to raise public understanding of medical radiation and the medical physics profession and to nurture future professionals for Macau.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ========== 章程 ========== -->
+      <div class="tab-panel prose" id="panel-constitution" role="tabpanel" aria-labelledby="tab-constitution">
+        <!-- TODO: 章程全文尚未提供。可在此貼上條文，或放一個 PDF 下載連結，例如：
+             <a class="btn" href="docs/MMPA_constitution.pdf" target="_blank" rel="noopener">下載章程（PDF）</a> -->
+        <div class="sub-head"><h3><span class="lang-zh">學會章程</span><span class="lang-en">Constitution</span></h3></div>
+        <p>
+          <span class="lang-zh">章程內容整理中，稍後將於此頁公佈。</span>
+          <span class="lang-en">The Association's constitution is being prepared and will be published on this page shortly.</span>
+        </p>
+      </div>
+
+      <!-- ========== 行政架構（原 members.html 的內容）========== -->
+      <div class="tab-panel" id="panel-structure" role="tabpanel" aria-labelledby="tab-structure">
+        <p class="org-intro">
+          <span class="lang-zh">學會設會員大會主席團、理事會及監事會。
+            會員大會為學會最高權力機關，負責定立學會之發展方向，領導理事會及監事會拓展學會業務。
+            理事會為學會行政機關，專責學會之行政事務、對外通訊聯絡，以及活動籌備等工作。
+            監事會為學會之監察機關，專責監察理事會之工作合理性、財政核算，每年就理事會工作成果提出意見及建議，以確保學會發展符合澳門特別行政區法律。
+          </span>
+          <span class="lang-en">The Association comprises the Presidium of the General Assembly, the Board of Directors and the Supervisory Board.
+            The General Assembly is the Association's highest authority; it sets the direction of development and leads the Board and the Supervisory Board in expanding the Association's work.
+            The Board of Directors is the executive body, responsible for administration, external communication and event organization.
+            The Supervisory Board is the oversight body; it reviews the soundness of the Board's work and its financial accounts, and each year offers opinions and recommendations on the Board's results, so that the Association's development complies with the laws of the Macao Special Administrative Region.</span>
+        </p>
+
+        <div class="group-head section-head">
+          <h2><span class="lang-zh">會員大會主席團</span><span class="lang-en">General Assembly</span></h2>
+        </div>
+        <div class="member-grid">
+          <div class="member-card">
+            <img src="images/members/LMI.png" alt="李敏兒">
+            <h3>李敏兒</h3>
+            <p class="role"><span class="lang-zh">會長</span><span class="lang-en">Chairperson</span></p>
+            <p class="profession"><span class="lang-zh">放射師、醫學物理師</span><span class="lang-en">Radiographer, Medical Physicist</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/LWT.jpg" alt="廖偉霆">
+            <h3>廖偉霆</h3>
+            <p class="role"><span class="lang-zh">副會長</span><span class="lang-en">Vice Chairperson</span></p>
+            <p class="profession"><span class="lang-zh">放射師、醫學物理師</span><span class="lang-en">Radiographer, Medical Physicist</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/CCI.png" alt="許正妍">
+            <h3>許正妍</h3>
+            <p class="role"><span class="lang-zh">秘書長</span><span class="lang-en">Secretary-General</span></p>
+            <p class="profession"><span class="lang-zh">放射師</span><span class="lang-en">Radiographer</span></p>
+          </div>
+        </div>
+
+        <div class="group-head section-head">
+          <h2><span class="lang-zh">理事會</span><span class="lang-en">Board of Directors</span></h2>
+        </div>
+        <div class="member-grid">
+          <div class="member-card">
+            <img src="images/members/LKH.png" alt="李嘉浩">
+            <h3>李嘉浩</h3>
+            <p class="role"><span class="lang-zh">理事長</span><span class="lang-en">Director-General</span></p>
+            <p class="profession"><span class="lang-zh">醫學物理師</span><span class="lang-en">Medical Physicist</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/LHT.png" alt="李凱彤">
+            <h3>李凱彤</h3>
+            <p class="role"><span class="lang-zh">副理事長</span><span class="lang-en">Deputy Director-General</span></p>
+            <p class="profession"><span class="lang-zh">醫學物理師</span><span class="lang-en">Medical Physicist</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/CHC.png" alt="張浩澄">
+            <h3>張浩澄</h3>
+            <p class="role"><span class="lang-zh">財務</span><span class="lang-en">Treasurer</span></p>
+            <p class="profession"><span class="lang-zh">醫學物理師</span><span class="lang-en">Medical Physicist</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/ZW.png" alt="周雯">
+            <h3>周雯</h3>
+            <p class="role"><span class="lang-zh">理事</span><span class="lang-en">Director</span></p>
+            <p class="profession"><span class="lang-zh">護士</span><span class="lang-en">Nurse</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/CIU.png" alt="陳欣如">
+            <h3>陳欣如</h3>
+            <p class="role"><span class="lang-zh">理事</span><span class="lang-en">Director</span></p>
+            <p class="profession"><span class="lang-zh">放射師</span><span class="lang-en">Radiographer</span></p>
+          </div>
+        </div>
+
+        <div class="group-head section-head">
+          <h2><span class="lang-zh">監事會</span><span class="lang-en">Supervisory Board</span></h2>
+        </div>
+        <div class="member-grid">
+          <div class="member-card">
+            <img src="images/members/LCK.png" alt="梁志強">
+            <h3>梁志強</h3>
+            <p class="role"><span class="lang-zh">監事長</span><span class="lang-en">Chief Supervisor</span></p>
+            <p class="profession"><span class="lang-zh">工程師</span><span class="lang-en">Engineer</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/MKL.png" alt="麥敬樂">
+            <h3>麥敬樂</h3>
+            <p class="role"><span class="lang-zh">副監事長</span><span class="lang-en">Deputy Chief Supervisor</span></p>
+            <p class="profession"><span class="lang-zh">放射師</span><span class="lang-en">Radiographer</span></p>
+          </div>
+          <div class="member-card">
+            <img src="images/members/TW.png" alt="鄧穎">
+            <h3>鄧穎</h3>
+            <p class="role"><span class="lang-zh">秘書</span><span class="lang-en">Secretary</span></p>
+            <p class="profession"><span class="lang-zh">放射師</span><span class="lang-en">Radiographer</span></p>
+          </div>
+        </div>
+        <div class="group-head section-head">
+          <h2><span class="lang-zh">顧問</span><span class="lang-en">Advisors</span></h2>
+        </div>
+        <div class="member-grid">
+          <div class="member-card member-card--advisor">
+            <img src="images/members/ADV1.png" alt="梁頌文">
+            <h3>梁頌文</h3>
+            <p class="role"><span class="lang-zh">臨床顧問</span><span class="lang-en">Clinical Advisor</span></p>
+            <p class="profession"><span class="lang-zh">放射治療專科醫生／仁伯爵綜合醫院</span><span class="lang-en">Radiation Oncologist / Conde S. Januário Hospital</span></p>
+          </div>
+          <div class="member-card member-card--advisor">
+            <img src="images/members/ADV2.png" alt="莫昇萍">
+            <h3>莫昇萍</h3>
+            <p class="role"><span class="lang-zh">學術顧問</span><span class="lang-en">Academic Advisor</span></p>
+            <p class="profession"><span class="lang-zh">電子及電腦工程系教授／澳門大學</span><span class="lang-en">Professor of Electronic and Computer Engineering / University of Macau</span></p>
+          </div>
+          <div class="member-card member-card--advisor">
+            <img src="images/members/ADV3.png" alt="鄭美鈺">
+            <h3>鄭美鈺</h3>
+            <p class="role"><span class="lang-zh">會務顧問</span><span class="lang-en">Membership Advisor</span></p>
+            <!-- <p class="profession"><span class="lang-zh">職稱／單位</span><span class="lang-en">Title / Affiliation</span></p> -->
+          </div>
+          <div class="member-card member-card--advisor">
+            <img src="images/members/ADV4.png" alt="林珊珊">
+            <h3>林珊珊</h3>
+            <p class="role"><span class="lang-zh">財務顧問</span><span class="lang-en">Financial Advisor</span></p>
+            <!-- <p class="profession"><span class="lang-zh">職稱／單位</span><span class="lang-en">Title / Affiliation</span></p> -->
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span><span class="lang-zh">© 2026 學會名稱。保留所有權利。</span><span class="lang-en">© 2026 Society Name. All rights reserved.</span></span>
+    <span><span class="lang-zh">© 2026 澳門醫學物理學會。保留所有權利。</span><span class="lang-en">© 2026 Macau Medical Physics Association. All rights reserved.</span></span>
     <span><a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a></span>
   </div>
 </footer>
 
+<script src="news-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

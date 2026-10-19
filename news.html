@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>最新消息 News — 學會官網 Society Website</title>
+<title>最新消息 News — 澳門醫學物理學會 MMPA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500&family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -17,16 +17,34 @@
       <span class="lang-zh">澳門醫學物理學會</span>
       <span class="lang-en">Macau Medical Physics Association</span>
     </a>
-    <nav class="main-nav" id="main-nav">
+    <div class="header-tools">
+      <form class="site-search" id="site-search" role="search" autocomplete="off">
+        <input type="search" id="search-input" placeholder="搜尋網站" data-ph-zh="搜尋網站" data-ph-en="Search" aria-label="Search" aria-controls="search-results">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </form>
+      <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
+      <a class="icon-btn" href="mailto:inquiry.mmpa@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+      <!-- TODO: 把 href="#" 換成學會的 Facebook 專頁網址 -->
+      <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+    </div>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Main">
+    <div class="nav-inner">
       <a href="index.html"><span class="lang-zh">首頁</span><span class="lang-en">Home</span></a>
-      <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
-      <a href="members.html"><span class="lang-zh">組織架構</span><span class="lang-en">Organization</span></a>
+      <div class="nav-item">
+        <a href="about.html"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
+        <div class="subnav">
+          <a href="about.html#intro"><span class="lang-zh">本會簡介</span><span class="lang-en">About the Association</span></a>
+          <a href="about.html#constitution"><span class="lang-zh">章程</span><span class="lang-en">Constitution</span></a>
+          <a href="about.html#structure"><span class="lang-zh">行政架構</span><span class="lang-en">Organization</span></a>
+        </div>
+      </div>
       <a href="news.html" aria-current="page"><span class="lang-zh">最新消息</span><span class="lang-en">News</span></a>
       <a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
-    </nav>
-    <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button>
-    <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <main>
@@ -40,32 +58,25 @@
 
   <section class="section">
     <div class="wrap">
-
-      <!-- TODO: 每則消息複製一組 .news-item -->
-<article class="news-item">
-        <div class="news-date">2026.09.20</div>
-        <a class="news-link" href="posters/20260920_OpenningCeremony.pdf" target="_blank" rel="noopener">
-          <h3>
-            <span class="lang-zh">澳門醫學物理學會成立典禮</span>
-            <span class="lang-en">Inauguration Ceremony of the Macau Medical Physics Association</span>
-          </h3>
-        </a>
-        <p>
-          <span class="lang-zh">澳門醫學物理學會（下稱「本會」）於 2024 年 9 月 19 日登記成立。本會謹訂於 2026 年 9 月 20 日（星期日）下午三時正，假澳門旅遊塔會議中心舉行成立典禮。是次活動將特邀北京、澳門及香港三地之醫學物理、臨床醫療、生物醫學工程等領域之專家學者，以及多個相關專業學會代表出席。</span>
-          <span class="lang-en">The Macau Medical Physics Association (the "Association") was formally registered on 19 September 2024, founded jointly by medical physicists and radiographers working in radiotherapy, medical imaging and nuclear medicine in Macau as a non-profit academic organization. Its mission is to advance the professional development of medical physics in Macau, promote cross-regional academic exchange, cultivate professional talent, encourage more young people in Macau to pursue careers in medical physics, and deepen collaboration with related disciplines. The inaugural ceremony will be held on Sunday, 20 September 2026 at 3:00 PM, at the Macau Tower Convention Centre, with invited experts and scholars from Beijing, Macau and Hong Kong in medical physics, clinical medicine and biomedical engineering, alongside representatives of related professional societies. Approximately 100 attendees are expected.</span>
-        </p>
-      </article>
+      <!-- 列表由 script.js 依 news-data.js 產生：每頁 12 則，右側為海報縮圖。
+           新增消息請編輯 news-data.js，不用改這個檔案。 -->
+      <div id="news-list">
+        <noscript><p>請啟用 JavaScript 以瀏覽最新消息。 / Please enable JavaScript to view the news.</p></noscript>
+      </div>
+      <nav class="pager" id="pager" aria-label="Pagination"></nav>
+      <p class="pager-info" id="pager-info"></p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span><span class="lang-zh">© 2026 學會名稱。保留所有權利。</span><span class="lang-en">© 2026 Society Name. All rights reserved.</span></span>
+    <span><span class="lang-zh">© 2026 澳門醫學物理學會。保留所有權利。</span><span class="lang-en">© 2026 Macau Medical Physics Association. All rights reserved.</span></span>
     <span><a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a></span>
   </div>
 </footer>
 
+<script src="news-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
