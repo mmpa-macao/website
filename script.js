@@ -324,14 +324,14 @@
     { zh: '首頁', en: 'Home', url: 'index.html', kw: '學會 格言 格物致知 mmpa' },
     { zh: '本會簡介', en: 'About the Association', url: 'about.html#intro',
       kw: '關於我們 簡介 歷史 成立宗旨 發展目標 主要會務 服務範圍 about mission history goals activities' },
-    { zh: '章程', en: 'Constitution', url: 'about.html#constitution', kw: '章程 constitution bylaws' },
+    { zh: '入會申請', en: 'Membership application', url: 'about.html#join',
+      kw: '入會 申請 加入會員 會員 個人會員 準會員 贊助會員 入會費 年費 membership join apply member' },
     { zh: '行政架構', en: 'Organization', url: 'about.html#structure',
       kw: '組織架構 成員 會員大會 主席團 理事會 監事會 會長 副會長 秘書長 理事長 監事長 ' +
           '李敏兒 廖偉霆 許正妍 李嘉浩 李凱彤 張浩澄 周雯 陳欣如 梁志強 麥敬樂 鄧穎 ' +
           'board directors supervisory general assembly members' },
     { zh: '最新消息', en: 'News', url: 'news.html', kw: '消息 活動 公告 news events' },
-    { zh: '聯絡我們', en: 'Contact', url: 'contact.html', kw: '電郵 電話 email phone 查詢 contact' },
-    { zh: '加入會員', en: 'Join us', url: 'contact.html?topic=join', kw: '入會 申請 會員 membership join' }
+    { zh: '聯絡我們', en: 'Contact', url: 'contact.html', kw: '電郵 電話 email phone 查詢 contact' }
   ];
 
   function initSearch() {
@@ -505,6 +505,116 @@
     window.addEventListener('hashchange', fromHash);
     fromHash();
   }
+  /* ---------- 入會申請表（沒有後端：整理成郵件內容）---------- */
+  var JOIN_TO = 'inquiry.mmpa@gmail.com';   // TODO: 如有專門收入會申請的信箱，改這裡
+
+  function initJoin() {
+    var form = $('#join-form');
+    if (!form) return;
+    var result = $('#join-result');
+    var text = $('#join-text');
+    var mailto = $('#join-mailto');
+    var groups = $$('[data-for]', form);
+    var hint = $('#join-exp-hint');
+    var exp = $('#j-exp');
+
+    $$('.join-to', result).forEach(function (el) { el.textContent = JOIN_TO; });
+
+    function type() {
+      var r = $('input[name="type"]:checked', form);
+      return r ? r.value : '';
+    }
+
+    // 依會員類別顯示對應欄位；隱藏的欄位同時停用，才不會擋住送出或被寫進郵件
+    function sync() {
+      var t = type();
+      groups.forEach(function (g) {
+        var on = g.getAttribute('data-for').split(' ').indexOf(t) !== -1;
+        g.hidden = !on;
+        if (g.tagName === 'FIELDSET') g.disabled = !on;
+        $$('input, select, textarea', g).forEach(function (c) { c.disabled = !on; });
+      });
+      checkExp();
+    }
+    function checkExp() {
+      if (!hint || !exp) return;
+      var v = parseFloat(exp.value);
+      hint.hidden = !(type() === 'individual' && !isNaN(v) && v < 2);
+    }
+
+    $$('input[name="type"]', form).forEach(function (r) { r.addEventListener('change', sync); });
+    if (exp) exp.addEventListener('input', checkExp);
+    sync();
+
+    // 把表單整理成純文字（欄位名稱一律用中文，方便學會收件後處理）
+    function compile() {
+      var d = new Date();
+      function p(x) { return (x < 10 ? '0' : '') + x; }
+      var lines = ['澳門醫學物理學會　入會申請', '提交日期：' + d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()), ''];
+      $$('fieldset', form).forEach(function (fs) {
+        if (fs.disabled) return;
+        var rows = [];
+        $$('input, select, textarea', fs).forEach(function (el) {
+          if (el.disabled || !el.name) return;
+          var label = el.getAttribute('data-label') || el.name;
+          var val;
+          if (el.type === 'radio') { if (!el.checked) return; val = el.getAttribute('data-text') || el.value; }
+          else if (el.type === 'checkbox') { if (!el.checked) return; val = '是'; }
+          else { val = el.value.trim(); }
+          if (val) rows.push(label + '：' + val);
+        });
+        if (!rows.length) return;
+        var lg = $('legend .lang-zh', fs);
+        lines.push('【' + (lg ? lg.textContent : '') + '】');
+        lines = lines.concat(rows, '');
+      });
+      lines.push('（附件：學歷及工作證明副本）');
+      return lines.join('\n');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var body = compile();
+      var name = ($('#j-name-zh').value || '').trim();
+      var checked = $('input[name="type"]:checked', form);
+      var subject = '[入會申請] ' + (checked ? checked.getAttribute('data-text') : '') + ' ' + name;
+      text.value = body;
+
+      // 郵件程式對網址長度有限制：太長時只帶簡短說明，內容改由「複製內容」貼上
+      var href = 'mailto:' + JOIN_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var pasted = $('#join-pasted');
+      var tooLong = href.length > 1800;
+      if (pasted) pasted.hidden = !tooLong;
+      if (tooLong) {
+        href = 'mailto:' + JOIN_TO + '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent('（申請內容較長，請在此貼上剛才複製的內容，並附上證明文件）');
+        copy(body);
+      }
+      mailto.setAttribute('href', href);
+
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      result.focus({ preventScroll: true });
+    });
+
+    function copy(str) {
+      function fallback() {
+        text.focus(); text.select();
+        try { document.execCommand('copy'); } catch (e) { /* 使用者可手動複製 */ }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str).catch(fallback);
+      } else {
+        fallback();
+      }
+    }
+    var copyBtn = $('#join-copy');
+    var copied = $('#join-copied');
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      copy(text.value);
+      if (copied) { copied.hidden = false; setTimeout(function () { copied.hidden = true; }, 2500); }
+    });
+  }
 
   /* ---------- 聯絡表單（沒有後端：整理內容後開啟使用者的郵件程式）---------- */
   var CONTACT_TO = 'medicalphysics.macau@gmail.com';
@@ -548,6 +658,7 @@
     initCarousel();
     initTabs();
     initContact();
+    initJoin();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
