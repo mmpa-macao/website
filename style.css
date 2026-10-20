@@ -891,3 +891,20 @@ textarea:focus-visible {
 .carousel-btn:focus-visible {
   outline-color: var(--mint);
 }
+
+/* 章程 / Constitution ---------------------------------------------- */
+.law h4 {
+  font-family: var(--font-head-zh), serif;
+  font-size: 1.02rem;
+  color: var(--navy);
+  margin: 26px 0 8px;
+}
+.law p { margin: 0 0 0.6em; }
+.law .item { padding-left: 2em; }
+.law .item--2 { padding-left: 4em; }
+
+.law-title { text-align: center; font-size: 1.5rem; margin-bottom: 2px; }
+.law-sub { text-align: center; color: #6b7490; font-size: 0.85rem; letter-spacing: 0.04em; margin-bottom: 8px; }
+.law-cert { color: #45506b; font-size: 0.9rem; border-left: 3px solid var(--mint); padding-left: 14px; margin-bottom: 28px; }
+.law-end { margin-top: 36px; margin-bottom: 0; text-align: right; border-left: none; padding-left: 0; }
+.law-emblem { margin: 8px 0 0; }
