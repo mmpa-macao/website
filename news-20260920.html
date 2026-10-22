@@ -25,8 +25,7 @@
       </form>
       <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
       <a class="icon-btn" href="mailto:inquiry.mmpa@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
-      <!-- TODO: 把 href="#" 換成學會的 Facebook 專頁網址 -->
-      <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+      <a class="icon-btn" href="https://www.facebook.com/profile.php?id=61595477795837" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
     </div>
     <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
   </div>
@@ -47,8 +46,8 @@
   </nav>
 </header>
 
-<!-- 活動介紹頁範本：新增活動時複製此檔（檔名如 news-YYYYMMDD.html），改文字與圖片，
-     再到 news-data.js 加一筆對應的消息即可。 -->
+<!-- 活動報名／介紹頁（活動前發佈）。活動結束後的回顧另立一頁：news-20260920-review.html -->
+
 <main>
   <section class="section">
     <div class="wrap">
@@ -60,8 +59,8 @@
           <span class="lang-en">Inauguration Ceremony of the Macao Medical Physics Association</span>
         </h1>
         <p class="news-date"><span class="lang-zh">發佈日期　--</span><span class="lang-en">Posted 2026.08.01</span></p>
-        <!-- 「回顧」標籤：活動結束且 news-data.js 有填 album 時，由 script.js 自動填入 -->
-        <p class="detail-review" id="detail-review" hidden></p>
+        <!-- 活動已結束：連到獨立的活動回顧頁 -->
+        <p><a class="btn" href="news-20260920-review.html"><span class="lang-zh">活動已結束，查看活動回顧 →</span><span class="lang-en">Event concluded — view the event review →</span></a></p>
       </div>
 
       <!-- 海報與活動流程：放入 images/news/ 底下的圖片；點圖可開啟大圖 -->
@@ -92,14 +91,6 @@
           <span class="lang-en">The Macao Medical Physics Association (the "Association") was formally registered on 19 September 2024, founded jointly by medical physicists and radiographers working in radiotherapy, medical imaging and nuclear medicine in Macau as a non-profit academic organization. Its mission is to advance the professional development of medical physics in Macau, promote cross-regional academic exchange, cultivate professional talent, encourage more young people in Macau to pursue careers in medical physics, and deepen collaboration with related disciplines. The inaugural ceremony will be held on Sunday, 20 September 2026 at 3:00 PM, at the Macau Tower Convention Centre, with invited experts and scholars from Beijing, Macau and Hong Kong in medical physics, clinical medicine and biomedical engineering, alongside representatives of related professional societies. Approximately 100 attendees are expected.</span>
         </p>
         <p><a class="btn" href="posters/20260920_OpenningCeremony.pdf" target="_blank" rel="noopener"><span class="lang-zh">下載海報（PDF）</span><span class="lang-en">Download poster (PDF)</span></a></p>
-      </div>
-
-      <!-- 活動相冊：活動日期一過、且 news-data.js 該活動有填 album，script.js 才會填入相片並顯示。
-           相片路徑與張數請到 news-data.js 設定，這裡不用改。 -->
-      <div id="album" hidden>
-        <div class="sub-head"><h3><span class="lang-zh">活動回顧</span><span class="lang-en">Event review</span></h3></div>
-        <p class="album-note"><span class="lang-zh">點擊相片可放大，左右鍵或滑動切換。</span><span class="lang-en">Click a photo to enlarge; use the arrow keys or swipe to browse.</span></p>
-        <div class="album" id="album-grid"></div>
       </div>
     </div>
   </section>

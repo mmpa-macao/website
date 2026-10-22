@@ -4,19 +4,24 @@
    新增一則消息：複製下面的 { ... } 區塊，貼在陣列裡（順序不拘，網頁會依 date 由新到舊排序）。
 
    date     列表上顯示的日期，格式 'YYYY.MM.DD'（也用來排序）
-   url      該則消息的介紹頁（複製 news-20260920.html 修改即可）
+   url      該則消息的介紹頁（報名頁複製 news-20260920.html、回顧頁複製 news-20260920-review.html 修改即可）
    poster   列表右側的海報縮圖；檔案不存在時會顯示漸層佔位
    title / summary   zh = 中文、en = English
-   album    （選填）活動相片的路徑清單。填了之後，活動日期一過，
-            列表上會自動出現「回顧」標籤，連到活動頁底部的相冊；
-            活動日期之前即使有填，也不會顯示。沒有相片就整個不要寫 album。
+   album    （選填）活動相片的路徑清單。
+            · 一般消息：填了之後，活動日期一過，列表上會自動出現「回顧」標籤，
+              連到該活動頁底部的相冊；活動日期之前即使有填，也不會顯示。
+            · 回顧稿（review: true）：相冊直接顯示，不受日期限制，列表上也不加「回顧」標籤。
+            沒有相片就整個不要寫 album。
+   review   （選填）true = 這則是「活動回顧」獨立消息（活動結束後另外發佈）。
    ============================================================ */
 window.MMPA_NEWS = [
+  // ---- 活動回顧（活動結束後發佈）----
   {
-    date: '2026.09.20',
-    url: 'news-20260920.html',
+    date: '2026.10.22',
+    url: 'news-20260920-review.html',
+    review: true,
     poster: 'images/news/20260920_poster.jpg',
-    // 相片放在 images/news/20260920/ 資料夾，檔名依下面填寫（以下 8 張只是示範，請換成實際檔名與數量）
+    // 相片放在 images/news/20260920/ 資料夾，檔名依下面填寫（以下 10 張只是示範，請換成實際檔名與數量）
     album: [
       'images/news/20260920/01.jpg',
       'images/news/20260920/02.jpg',
@@ -28,8 +33,21 @@ window.MMPA_NEWS = [
       'images/news/20260920/08.jpg',
       'images/news/20260920/09.jpg',
       'images/news/20260920/10.jpg'
-
     ],
+    title: {
+      zh: '澳門醫學物理學會成立典禮｜活動回顧',
+      en: 'Inauguration Ceremony of the Macao Medical Physics Association — Event Review'
+    },
+    summary: {
+      zh: '澳門醫學物理學會成立典禮已於 2026 年 9 月 20 日假澳門旅遊塔會議中心舉行，本文整理出席嘉賓、活動亮點及活動相冊。',
+      en: 'The inauguration ceremony of the Macao Medical Physics Association was held on 20 September 2026 at the Macau Tower Convention Centre. This review covers the guests, highlights and photo album.'
+    }
+  },
+  // ---- 活動報名／介紹（活動前發佈）----
+  {
+    date: '2026.09.20',
+    url: 'news-20260920.html',
+    poster: 'images/news/20260920_poster.jpg',
     title: {
       zh: '澳門醫學物理學會成立典禮',
       en: 'Inauguration Ceremony of the Macau Medical Physics Association'

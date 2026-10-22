@@ -98,12 +98,13 @@
     function p(x) { return (x < 10 ? '0' : '') + x; }
     return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate());
   }
-  // 活動日期已過（不含當天）而且有相片，才算「有回顧」
+  // 有相片、且（活動日期已過（不含當天），或這則消息本身就是回顧稿 review: true），才算「有回顧」
   function hasReview(n) {
-    return !!(n.album && n.album.length) && n.date < today();
+    return !!(n.album && n.album.length) && (!!n.review || n.date < today());
   }
+  // 回顧稿本身（review: true）不再加「回顧」標籤，標題已經說明了
   function reviewTagHTML(n) {
-    if (!hasReview(n)) return '';
+    if (n.review || !hasReview(n)) return '';
     return '<a class="review-tag" href="' + esc(n.url) + '#album">' + CAMERA + bi({ zh: '回顧', en: 'Review' }) + '</a>';
   }
 
@@ -505,8 +506,57 @@
     window.addEventListener('hashchange', fromHash);
     fromHash();
   }
-  /* ---------- 入會申請表（沒有後端：整理成郵件內容）---------- */
-  var JOIN_TO = 'inquiry.mmpa@gmail.com';   // TODO: 如有專門收入會申請的信箱，改這裡
+  /* ---------- 表單寄送：Google Apps Script ----------
+     入會申請與聯絡表單都送到學會自己的 Google Apps Script（見 apps-script/Code.gs），
+     由它存檔到學會雲端硬碟並寄通知信，中文與附件都不會經過使用者的郵件程式。
+     部署後把「網頁應用程式網址」貼在下面。沒填，或寄送失敗時，
+     網頁會自動退回「開啟郵件程式」的備援做法。 */
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx4RLlcJK2u7zlKT-RBSh-R-9ee1LcUQr95dwUPkaRnpmNm63Z23zqh7szhSIrbjLWFXw/exec';
+  var PAGE_START = Date.now();                                              // 用來辨識「填太快」的機器人
+  var MAX_FILES = 3;
+  var MAX_FILE_BYTES = 5 * 1024 * 1024;                                     // 與 Code.gs 的上限一致
+  var FILE_MIME = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png' };
+
+  function fileExt(f) { var m = /\.([^.]+)$/.exec(f.name || ''); return m ? m[1].toLowerCase() : ''; }
+
+  // 檢查選取的檔案；回傳錯誤訊息（空字串 = 沒問題）
+  function fileError(files) {
+    var en = lang() === 'en';
+    if (files.length > MAX_FILES) return en ? 'Please choose at most ' + MAX_FILES + ' files.' : '最多只能上傳 ' + MAX_FILES + ' 個檔案。';
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      if (!FILE_MIME[fileExt(f)]) return en ? '“' + f.name + '”: only PDF, JPG or PNG files are accepted.' : '「' + f.name + '」格式不符，只接受 PDF、JPG、PNG。';
+      if (f.size > MAX_FILE_BYTES) return en ? '“' + f.name + '” is larger than 5 MB.' : '「' + f.name + '」超過 5 MB。';
+    }
+    return '';
+  }
+
+  function readFile(f) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () {
+        var s = String(r.result);                                 // data:...;base64,XXXX
+        resolve({ name: f.name, type: FILE_MIME[fileExt(f)], data: s.slice(s.indexOf(',') + 1) });
+      };
+      r.onerror = function () { reject(r.error || new Error('read failed')); };
+      r.readAsDataURL(f);
+    });
+  }
+
+  function sendForm(payload) {
+    if (!FORM_ENDPOINT || FORM_ENDPOINT.indexOf('XXXX') !== -1) return Promise.reject(new Error('no endpoint'));
+    payload.t = Date.now() - PAGE_START;
+    // 刻意不設 Content-Type（預設 text/plain）：這是「簡單請求」，不會觸發 CORS 預檢，Apps Script 才收得到
+    return fetch(FORM_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok) throw new Error((j && j.error) || 'send failed');
+        return j;
+      });
+  }
+
+  /* ---------- 入會申請表 ---------- */
+  var JOIN_TO = 'medicalphysics.macau@gmail.com';   // 備援用：寄送失敗時，請申請人改寄到這個信箱
 
   function initJoin() {
     var form = $('#join-form');
@@ -517,6 +567,8 @@
     var groups = $$('[data-for]', form);
     var hint = $('#join-exp-hint');
     var exp = $('#j-exp');
+    var fileInput = $('#j-files');
+    var status = $('#join-status');
 
     $$('.join-to', result).forEach(function (el) { el.textContent = JOIN_TO; });
 
@@ -525,7 +577,7 @@
       return r ? r.value : '';
     }
 
-    // 依會員類別顯示對應欄位；隱藏的欄位同時停用，才不會擋住送出或被寫進郵件
+    // 依會員類別顯示對應欄位；隱藏的欄位同時停用，才不會擋住送出或被寫進申請內容
     function sync() {
       var t = type();
       groups.forEach(function (g) {
@@ -546,6 +598,15 @@
     if (exp) exp.addEventListener('input', checkExp);
     sync();
 
+    // 選檔案時立刻檢查；有問題就用瀏覽器內建的驗證訊息擋住送出
+    function checkFiles() {
+      if (!fileInput) return;
+      var msg = fileError(Array.prototype.slice.call(fileInput.files));
+      fileInput.setCustomValidity(msg);
+      if (msg) fileInput.reportValidity();
+    }
+    if (fileInput) fileInput.addEventListener('change', checkFiles);
+
     // 把表單整理成純文字（欄位名稱一律用中文，方便學會收件後處理）
     function compile() {
       var d = new Date();
@@ -558,7 +619,10 @@
           if (el.disabled || !el.name) return;
           var label = el.getAttribute('data-label') || el.name;
           var val;
-          if (el.type === 'radio') { if (!el.checked) return; val = el.getAttribute('data-text') || el.value; }
+          if (el.type === 'file') {
+            val = Array.prototype.map.call(el.files, function (f) { return f.name; }).join('、');
+          }
+          else if (el.type === 'radio') { if (!el.checked) return; val = el.getAttribute('data-text') || el.value; }
           else if (el.type === 'checkbox') { if (!el.checked) return; val = '是'; }
           else { val = el.value.trim(); }
           if (val) rows.push(label + '：' + val);
@@ -568,19 +632,16 @@
         lines.push('【' + (lg ? lg.textContent : '') + '】');
         lines = lines.concat(rows, '');
       });
-      lines.push('（附件：學歷及工作證明副本）');
       return lines.join('\n');
     }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var body = compile();
-      var name = ($('#j-name-zh').value || '').trim();
-      var checked = $('input[name="type"]:checked', form);
-      var subject = '[入會申請] ' + (checked ? checked.getAttribute('data-text') : '') + ' ' + name;
-      text.value = body;
+    var sentBox = $('#join-sent');
+    var fallbackBox = $('#join-fallback');
 
-      // 郵件程式對網址長度有限制：太長時只帶簡短說明，內容改由「複製內容」貼上
+    // 寄送失敗（或還沒設定網址）時的備援：整理成郵件內容，由使用者自己寄出
+    function showFallback(body, subject) {
+      body += '\n（附件：學歷及工作證明副本，請於郵件中附上）';
+      text.value = body;
       var href = 'mailto:' + JOIN_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       var pasted = $('#join-pasted');
       var tooLong = href.length > 1800;
@@ -591,10 +652,44 @@
         copy(body);
       }
       mailto.setAttribute('href', href);
+      if (sentBox) sentBox.hidden = true;
+      if (fallbackBox) fallbackBox.hidden = false;
+    }
 
-      result.hidden = false;
-      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      result.focus({ preventScroll: true });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var body = compile();
+      var name = ($('#j-name-zh').value || '').trim();
+      var checked = $('input[name="type"]:checked', form);
+      var subject = '[入會申請] ' + (checked ? checked.getAttribute('data-text') : '') + ' ' + name;
+      var btn = $('.submit-btn', form);
+      var files = (fileInput && !fileInput.disabled) ? Array.prototype.slice.call(fileInput.files) : [];
+
+      btn.disabled = true;
+      if (status) status.hidden = false;
+      result.hidden = true;
+
+      Promise.all(files.map(readFile))
+        .then(function (list) {
+          return sendForm({
+            kind: 'join', subject: subject, name: name,
+            email: ($('#j-email').value || '').trim(),
+            message: body, files: list,
+            website: ($('#j-website') || {}).value || ''
+          });
+        })
+        .then(function () {
+          if (sentBox) sentBox.hidden = false;
+          if (fallbackBox) fallbackBox.hidden = true;
+        })
+        .catch(function () { showFallback(body, subject); })
+        .then(function () {
+          btn.disabled = false;
+          if (status) status.hidden = true;
+          result.hidden = false;
+          result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          result.focus({ preventScroll: true });
+        });
     });
 
     function copy(str) {
@@ -616,7 +711,7 @@
     });
   }
 
-  /* ---------- 聯絡表單（沒有後端：整理內容後開啟使用者的郵件程式）---------- */
+  /* ---------- 聯絡表單（送到 Apps Script；失敗時退回郵件備援）---------- */
   var CONTACT_TO = 'medicalphysics.macau@gmail.com';
 
   function initContact() {
@@ -625,7 +720,9 @@
     var name = $('#c-name');
     var email = $('#c-email');
     var msg = $('#c-message');
-    var note = $('#form-note-sent');
+    var ok = $('#form-ok');
+    var err = $('#form-err');
+    var fallbackLinks = $$('.form-mailto');
 
     // 首頁「加入會員」帶 ?topic=join 過來時，預填訊息
     if (new URLSearchParams(location.search).get('topic') === 'join' && !msg.value) {
@@ -639,10 +736,27 @@
       var en = lang() === 'en';
       var subject = (en ? '[Website inquiry] ' : '[網站查詢] ') + name.value.trim();
       var body = msg.value.trim() + '\n\n—\n' + name.value.trim() + '\n' + email.value.trim();
-      location.href = 'mailto:' + CONTACT_TO +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-      if (note) note.hidden = false;
+      var btn = $('.submit-btn', form);
+      btn.disabled = true;
+      if (ok) ok.hidden = true;
+      if (err) err.hidden = true;
+
+      sendForm({
+        kind: 'contact', subject: subject,
+        name: name.value.trim(), email: email.value.trim(), message: msg.value.trim(),
+        website: ($('#c-website') || {}).value || ''
+      })
+        .then(function () {
+          form.reset();
+          if (ok) ok.hidden = false;
+        })
+        .catch(function () {
+          // 備援：改用使用者的郵件程式（部分郵件程式可能出現亂碼，內容也留在表單裡可複製）
+          var href = 'mailto:' + CONTACT_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+          fallbackLinks.forEach(function (a) { a.href = href; });
+          if (err) err.hidden = false;
+        })
+        .then(function () { btn.disabled = false; });
     });
   }
 

@@ -853,6 +853,8 @@ body.no-scroll { overflow: hidden; }
 .submit-btn:hover { background: var(--purple); }
 
 .form-note { color: #6b7490; font-size: 0.85rem; margin: 12px 0 0; }
+.form-note--ok { color: #1b6b4a; font-weight: 600; }
+.form-note--err { color: #b3261e; }
 
 .info-block { border-left: 3px solid var(--mint); padding-left: 16px; }
 .info-block h3 { font-size: 1rem; margin-bottom: 4px; }
@@ -1019,3 +1021,7 @@ button.btn { border: none; cursor: pointer; font-family: inherit; }
 button.btn-outline { border: 1px solid var(--navy); }
 .btn-outline:hover { background: var(--navy); color: #fff; }
 .join-copied { color: var(--teal); font-weight: 600; font-size: 0.9rem; }
+
+/* 機器人陷阱欄位：移出畫面（不用 display:none，部分機器人會略過隱藏欄位）*/
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.join-form input[type="file"] { padding: 8px; background: #fff; }
