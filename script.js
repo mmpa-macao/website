@@ -98,13 +98,12 @@
     function p(x) { return (x < 10 ? '0' : '') + x; }
     return d.getFullYear() + '.' + p(d.getMonth() + 1) + '.' + p(d.getDate());
   }
-  // 有相片、且（活動日期已過（不含當天），或這則消息本身就是回顧稿 review: true），才算「有回顧」
+  // 活動日期已過（不含當天）而且有相片，才算「有回顧」
   function hasReview(n) {
-    return !!(n.album && n.album.length) && (!!n.review || n.date < today());
+    return !!(n.album && n.album.length) && n.date < today();
   }
-  // 回顧稿本身（review: true）不再加「回顧」標籤，標題已經說明了
   function reviewTagHTML(n) {
-    if (n.review || !hasReview(n)) return '';
+    if (!hasReview(n)) return '';
     return '<a class="review-tag" href="' + esc(n.url) + '#album">' + CAMERA + bi({ zh: '回顧', en: 'Review' }) + '</a>';
   }
 
@@ -511,7 +510,7 @@
      由它存檔到學會雲端硬碟並寄通知信，中文與附件都不會經過使用者的郵件程式。
      部署後把「網頁應用程式網址」貼在下面。沒填，或寄送失敗時，
      網頁會自動退回「開啟郵件程式」的備援做法。 */
-  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx4RLlcJK2u7zlKT-RBSh-R-9ee1LcUQr95dwUPkaRnpmNm63Z23zqh7szhSIrbjLWFXw/exec';
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgLygZ2GiQXNIVM0xh2W-e0rgJ1jM_vQpPZ_amVonlFK95TClo1rHtCsjKrpaqTwzc-A/exec';
   var PAGE_START = Date.now();                                              // 用來辨識「填太快」的機器人
   var MAX_FILES = 3;
   var MAX_FILE_BYTES = 5 * 1024 * 1024;                                     // 與 Code.gs 的上限一致
@@ -635,6 +634,22 @@
       return lines.join('\n');
     }
 
+    // 另外整理成「欄位名稱 → 值」，給後端填試算表（名稱用各欄位的 data-label）
+    function collectFields() {
+      var out = {};
+      $$('input, select, textarea', form).forEach(function (el) {
+        if (el.disabled || !el.name || el.type === 'checkbox') return;
+        var label = el.getAttribute('data-label');
+        if (!label) return;
+        var val;
+        if (el.type === 'file') val = Array.prototype.map.call(el.files, function (f) { return f.name; }).join('、');
+        else if (el.type === 'radio') { if (!el.checked) return; val = el.getAttribute('data-text') || el.value; }
+        else val = el.value.trim();
+        if (val) out[label] = val;
+      });
+      return out;
+    }
+
     var sentBox = $('#join-sent');
     var fallbackBox = $('#join-fallback');
 
@@ -674,7 +689,7 @@
           return sendForm({
             kind: 'join', subject: subject, name: name,
             email: ($('#j-email').value || '').trim(),
-            message: body, files: list,
+            message: body, files: list, fields: collectFields(),
             website: ($('#j-website') || {}).value || ''
           });
         })
