@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入會申請 Membership — 澳門醫學物理學會 MMPA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500&family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="學會標誌" width="32" height="32">
+      <span class="lang-zh">澳門醫學物理學會</span>
+      <span class="lang-en">Macao Medical Physics Association</span>
+    </a>
+    <div class="header-tools">
+      <form class="site-search" id="site-search" role="search" autocomplete="off">
+        <input type="search" id="search-input" placeholder="搜尋網站" data-ph-zh="搜尋網站" data-ph-en="Search" aria-label="Search" aria-controls="search-results">
+        <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <ul class="search-results" id="search-results" hidden></ul>
+      </form>
+      <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch to English" title="中文 / English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.8 3.4 3 6 6 7.5M10.5 5c-.6 3.2-3 6.4-7 8.2"/><path d="M12.5 21l4.2-10 4.3 10M14 17.5h5.4"/></svg></button>
+      <a class="icon-btn" href="mailto:medicalphysics.macau@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+      <a class="icon-btn" href="https://www.facebook.com/profile.php?id=61595477795837" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg></a>
+    </div>
+    <a class="join-btn" href="join.html" aria-current="page"><span class="lang-zh">入會申請</span><span class="lang-en">Join us</span></a>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="index.html"><span class="lang-zh">首頁</span><span class="lang-en">Home</span></a>
+      <div class="nav-item">
+        <a href="about.html" aria-current="page"><span class="lang-zh">關於我們</span><span class="lang-en">About</span></a>
+        <div class="subnav">
+          <a href="about.html#intro"><span class="lang-zh">本會簡介</span><span class="lang-en">About us</span></a>
+          <a href="about.html#structure"><span class="lang-zh">組織架構</span><span class="lang-en">Structure</span></a>
+          <a href="join.html"><span class="lang-zh">入會申請</span><span class="lang-en">Membership</span></a>
+        </div>
+      </div>
+      <a href="news.html"><span class="lang-zh">最新消息</span><span class="lang-en">News</span></a>
+      <a href="publications.html"><span class="lang-zh">出版刊物</span><span class="lang-en">Publications</span></a>
+      <a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- 標題與一句話簡介 -->
+  <section class="section" style="border-bottom:none; padding-bottom:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span class="lang-zh">入會申請</span><span class="lang-en">Membership</span></h2>
+      </div>
+      <p class="join-lead">
+        <span class="lang-zh">有意加入的人士可以通過填寫下方的線上申請表，或通過<a href="#join-other"><span class="lang-zh">其他申請方式</span></a>成為會員。</span>
+        <span class="lang-en">Anyone who wishes to join can complete the online application form below or use <a href="#join-other"><span class="lang-en">other application methods</span></a>.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="join">
+
+        <!-- 一、入會資格與流程 -->
+        <section class="join-block" id="join-types" aria-labelledby="jn-h-types">
+          <div class="sub-head"><h3 id="jn-h-types"><span class="lang-zh">入會資格與流程</span><span class="lang-en">Eligibility and process</span></h3></div>
+          <p class="join-lead">
+            <span class="lang-zh">根據本會章程第二章第六條，會員類別、申請資格及入會費如下：</span>
+            <span class="lang-en">According to Article 6 of the Association's constitution, the membership classes, criteria and admission fees are as follows:</span>
+          </p>
+
+          <div class="join-types">
+            <article class="join-type">
+              <h4><span class="lang-zh">個人會員</span><span class="lang-en">Medical Physics Member</span></h4>
+              <p class="join-fee"><span class="lang-zh">入會費 <b>澳門幣 500 元</b></span><span class="lang-en">Admission fee <b>MOP 500</b></span></p>
+              <p><span class="lang-zh">永久性會費</span><span class="lang-en">Permanent</span></p>
+              <p><span class="lang-zh">年滿二十歲，並同時具備：</span><span class="lang-en">Aged 20 or above, and holding both:</span></p>
+              <ul>
+                <li><span class="lang-zh">醫學物理、醫學工程、放射科學、醫學影像或相關學歷；</span><span class="lang-en">a qualification in medical physics, biomedical engineering, radiological science, medical imaging or a related field;</span></li>
+                <li><span class="lang-zh">從事醫學放射專業工作兩年或以上。</span><span class="lang-en">two or more years of work in a medical radiation profession.</span></li>
+              </ul>
+            </article>
+            <article class="join-type">
+              <h4><span class="lang-zh">準會員</span><span class="lang-en">Associate Member</span></h4>
+              <p class="join-fee"><span class="lang-zh">入會費 <b>澳門幣 300 元</b></span><span class="lang-en">Admission fee <b>MOP 300</b></span></p>
+              <p><span class="lang-zh">永久性會費</span><span class="lang-en">Permanent</span></p>
+              <p><span class="lang-zh">訓練與工作年資未達個人會員資格者。</span><span class="lang-en">For those whose training and work experience do not yet meet the requirements for Medical Physics Membership.</span></p>
+            </article>
+            <article class="join-type">
+              <h4><span class="lang-zh">贊助會員</span><span class="lang-en">Sponsoring Member</span></h4>
+              <p class="join-fee"><span class="lang-zh">入會費 <b>澳門幣 2,000 元</b></span><span class="lang-en">Admission fee <b>MOP 2,000</b></span></p>
+              <p><span class="lang-zh">年費：澳門幣 10,000 元/年</span><span class="lang-en">Plus an annual fee of MOP 10,000</span></p>
+              <p><span class="lang-zh">贊同本會宗旨，並贊助本會經費及工作之團體或個人，經理事會通過者。</span><span class="lang-en">Organizations or individuals who endorse the Association's objectives and support its funding and work, as approved by the Board.</span></p>
+            </article>
+          </div>
+
+          <!-- 《入會管理制度》PDF（檔名沿用 mmpa-regulation.pdf） -->
+          <p class="form-note">
+          <span class="lang-zh">詳細可閲讀《澳門醫學物理學會會員入會管理制度》。</span>
+          <span class="lang-en">Please read the Association's Membership Regulations for details.</span>
+          <a href="downloads/mmpa-regulation.pdf" download><span class="lang-zh">下載文件（PDF）</span><span class="lang-en">Download File (PDF)</span></a>
+          </p>
+      
+          <h4 class="join-h4" id="jn-h-steps"><span class="lang-zh">申請流程</span><span class="lang-en">How it works</span></h4>
+          <ol class="join-steps" aria-labelledby="jn-h-steps">
+            <li>
+              <strong><span class="lang-zh">提交申請</span><span class="lang-en">Submit your application</span></strong>
+                <span class="lang-zh">在下方填寫線上申請表並上傳文件；也可電郵或郵寄提交（見「<a href="#join-other"><span class="lang-zh">其他申請方式</span></a>」）。</span>
+                <span class="lang-en">Complete the online form below and upload your documents; you can also apply by email or by post (see “<a href="#join-other"><span class="lang-en">Other ways to apply</span></a>”).</span>
+            </li>
+            <li>
+              <strong><span class="lang-zh">收件確認及補正</span><span class="lang-en">Acknowledgement and completion</span></strong>
+                <span class="lang-zh">本會將於 3 個工作日內向您發出收件確認。材料不齊全者，須自通知發出之日起 10 個工作日內補正。</span>
+                <span class="lang-en">The Secretariat acknowledges receipt within 3 working days. If documents are missing, supply them within 10 working days of the notice.</span>
+            </li>
+            <li>
+              <strong><span class="lang-zh">繳費及發證</span><span class="lang-en">Pay and receive your card</span></strong>
+                <span class="lang-zh">結果以電郵或書面形式通知。獲批准者須在通知發出後 15 天內繳費；完成後辦理會員登記，並納入會員名冊。</span>
+                <span class="lang-en">Results will be notified by email or in writing. If approved, pay within 15 days of the notice ; you are then registered and added to the roll.</span>
+            </li>
+          </ol>
+
+          <!-- 申請前請準備的文件（第九條第二、三款） -->
+          <div class="join-prep" id="join-documents">
+            <h4 class="join-h4"><span class="lang-zh">申請前請準備</span><span class="lang-en">Have these ready</span></h4>
+            <ul>
+              <li><span class="lang-zh">照片；</span><span class="lang-en">a photo;</span></li>
+              <li><span class="lang-zh">身份證明文件副本；</span><span class="lang-en">a copy of your identity document;</span></li>
+              <li><span class="lang-zh">學歷證明文件副本；</span><span class="lang-en">a copy of your qualification certificate;</span></li>
+              <li><span class="lang-zh">工作經歷證明（如適用）；</span><span class="lang-en">proof of work experience (if applicable);</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 二、線上申請表 -->
+        <section class="join-block" id="join-form-section" aria-labelledby="jn-h-form">
+          <div class="sub-head"><h3 id="jn-h-form"><span class="lang-zh">線上申請表</span><span class="lang-en">Online application form</span></h3></div>
+          <p class="form-note">
+            <span class="lang-zh"><span class="req">*</span> 為必填項目。網頁申請以系統記錄的提交時間為準。</span>
+            <span class="lang-en"><span class="req">*</span> marks a required field. The submission time is the one recorded by the system.</span>
+          </p>
+
+          <!-- 按「提交」會送到學會的 Google Apps Script（網址見 script.js 的 FORM_ENDPOINT）；失敗時退回郵件備援（收件人見 JOIN_TO）。 -->
+          <form id="join-form" class="join-form">
+
+            <fieldset>
+              <legend><span class="lang-zh">申請類別</span><span class="lang-en">Membership class</span></legend>
+              <div class="choice-group">
+                <label class="choice"><input type="radio" name="type" value="individual" data-label="會員類別" data-text="個人會員" checked required><span><span class="lang-zh">個人會員</span><span class="lang-en">Medical Physics Member</span></span></label>
+                <label class="choice"><input type="radio" name="type" value="associate" data-label="會員類別" data-text="準會員"><span><span class="lang-zh">準會員</span><span class="lang-en">Associate Member</span></span></label>
+                <label class="choice"><input type="radio" name="type" value="sponsor" data-label="會員類別" data-text="贊助會員"><span><span class="lang-zh">贊助會員</span><span class="lang-en">Sponsoring Member</span></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="lang-zh">個人資料</span><span class="lang-en">Personal information</span></legend>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-name-zh"><span class="lang-zh">姓名（中文）／聯絡人</span><span class="lang-en">Name (Chinese) / contact person</span></label>
+                  <input type="text" id="j-name-zh" name="name_zh" data-label="姓名（中文）" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="j-name-en"><span class="lang-zh">姓名（英文／葡文）</span><span class="lang-en">Name (English / Portuguese)</span></label>
+                  <input type="text" id="j-name-en" name="name_en" data-label="姓名（英文／葡文）" autocomplete="off" >
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="lang-zh">聯絡方式</span><span class="lang-en">Contact</span></legend>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-email"><span class="lang-zh">電郵</span><span class="lang-en">Email</span></label>
+                  <input type="email" id="j-email" name="email" data-label="電郵" autocomplete="email" inputmode="email" required>
+                </div>
+                <div class="field">
+                  <label for="j-phone"><span class="lang-zh">聯絡電話</span><span class="lang-en">Phone</span></label>
+                  <input type="tel" id="j-phone" name="phone" data-label="聯絡電話" autocomplete="tel" inputmode="tel" placeholder="例：6123 4567" data-ph-zh="例：6123 4567" data-ph-en="e.g. 6123 4567" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="j-address"><span class="lang-zh">通訊地址（選填）</span><span class="lang-en">Postal address (optional)</span></label>
+                <input type="text" id="j-address" name="address" data-label="通訊地址" autocomplete="street-address" placeholder="例：澳門 ○○街 ○○號" data-ph-zh="例：澳門 ○○街 ○○號" data-ph-en="Street, building, flat">
+              </div>
+            </fieldset>
+
+            <!-- 贊助會員才顯示 -->
+            <fieldset data-for="sponsor">
+              <legend><span class="lang-zh">贊助資料</span><span class="lang-en">Sponsorship details</span></legend>
+              <div class="field">
+                <label for="j-org"><span class="lang-zh">團體名稱</span><span class="lang-en">Organization</span></label>
+                <input type="text" id="j-org" name="sponsor_org" data-label="團體名稱" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="j-sponsor-note"><span class="lang-zh">贊助意向／說明</span><span class="lang-en">Sponsorship intention / notes</span></label>
+                <textarea id="j-sponsor-note" name="sponsor_note" rows="4" data-label="贊助意向／說明" placeholder="請簡述贊助意向或方式" data-ph-zh="請簡述贊助意向或方式" data-ph-en="Briefly describe your sponsorship intention" required></textarea>
+              </div>
+            </fieldset>
+
+            <!-- 個人會員、準會員才顯示 -->
+            <fieldset data-for="individual associate">
+              <legend><span class="lang-zh">專業背景</span><span class="lang-en">Professional background</span></legend>
+
+              <p class="join-sub"><span class="lang-zh">學歷</span><span class="lang-en">Academic qualification</span></p>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-degree"><span class="lang-zh">最高學歷</span><span class="lang-en">Highest qualification</span></label>
+                  <select id="j-degree" name="degree" data-label="最高學歷" required>
+                    <option value="">—</option>
+                    <option value="博士">博士 / Doctorate</option>
+                    <option value="碩士">碩士 / Master's</option>
+                    <option value="學士">學士 / Bachelor's</option>
+                    <option value="其他">其他 / Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="j-major"><span class="lang-zh">專業／科目</span><span class="lang-en">Field of study</span></label>
+                  <input type="text" id="j-major" name="major" data-label="專業／科目" autocomplete="off" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-school"><span class="lang-zh">畢業院校</span><span class="lang-en">University / institution</span></label>
+                  <input type="text" id="j-school" name="school" data-label="畢業院校" autocomplete="off" required>
+                </div>
+                <div class="field">
+                  <label for="j-year"><span class="lang-zh">畢業年份</span><span class="lang-en">Year awarded</span></label>
+                  <input type="number" id="j-year" name="grad_year" data-label="畢業年份" min="1950" max="2100" step="1" inputmode="numeric" autocomplete="off" required>
+                </div>
+              </div>
+
+              <p class="join-sub"><span class="lang-zh">現職及工作經歷</span><span class="lang-en">Employment</span></p>
+              <div class="form-row">
+                <div class="field">
+                  <label for="j-employer"><span class="lang-zh">現職機構</span><span class="lang-en">Current employer</span></label>
+                  <input type="text" id="j-employer" name="employer" data-label="現職機構" data-required-for="individual" autocomplete="organization">
+                </div>
+                <div class="field">
+                  <label for="j-title"><span class="lang-zh">職位</span><span class="lang-en">Job title</span></label>
+                  <input type="text" id="j-title" name="job_title" data-label="職位" data-required-for="individual" autocomplete="organization-title">
+                </div>
+              </div>
+              <div class="field">
+                <label for="j-exp"><span class="lang-zh">從事醫學放射相關專業工作年資（年）</span><span class="lang-en">Years of work in a medical radiation profession</span></label>
+                <input type="number" id="j-exp" name="exp_years" data-label="相關工作年資（年）" data-required-for="individual" min="0" max="60" step="0.5" inputmode="decimal" autocomplete="off" aria-describedby="join-exp-hint">
+                <p class="join-hint" id="join-exp-hint" role="status" hidden>
+                  <span class="lang-zh">個人會員須具兩年或以上相關工作經驗；未滿兩年建議改選「準會員」。</span>
+                  <span class="lang-en">Medical Physics Members need two or more years of relevant experience; with less, please consider applying as an Associate Member.</span>
+                </p>
+              </div>
+              <div class="field">
+                <label for="j-history"><span class="lang-zh">相關工作經歷（由近至遠，註明起訖年月、機構及職務）</span><span class="lang-en">Relevant work history (most recent first: dates, employer, role)</span></label>
+                <textarea id="j-history" name="history" rows="5" data-label="相關工作經歷" placeholder="例：2022.03–至今　○○醫院　醫學物理師" data-ph-zh="例：2022.03–至今　○○醫院　醫學物理師" data-ph-en="e.g. 03/2022–present, XX Hospital, Medical physicist"></textarea>
+              </div>
+            </fieldset>
+
+            <!-- 其他：證明文件及聲明。上限要與 script.js 的 MAX_FILES / MAX_FILE_BYTES、Code.gs 的 CONFIG 一致（目前：5 個檔案、每個 5 MB） -->
+            <fieldset>
+              <legend><span class="lang-zh">證明文件及聲明</span><span class="lang-en">Documents and declarations</span></legend>
+
+              <div class="field">
+                <label for="j-files"><span class="lang-zh">證明文件</span><span class="lang-en">Supporting documents</span></label>
+                <input type="file" id="j-files" name="proof" data-label="附件" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple aria-describedby="j-files-help" required>
+                <p class="form-note" id="j-files-help">
+                  <span class="lang-zh">PDF／JPG／PNG，最多 5 個檔案，每個不超過 5 MB。</span>
+                  <span class="lang-en">PDF / JPG / PNG, up to 5 files, 5 MB each.</span>
+                </p>
+              </div>
+
+              <p class="join-sub"><span class="lang-zh">聲明</span><span class="lang-en">Declaration</span></p>
+              <label class="choice" data-for="individual">
+                <input type="checkbox" name="age_ok" data-label="年滿二十歲" required>
+                <span><span class="lang-zh">本人年滿二十歲。</span><span class="lang-en">I am aged 20 or above.</span></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="decl_ok" data-label="聲明資料屬實並願遵守章程" required>
+                <span><span class="lang-zh">本人聲明以上資料及所附文件屬實、正確及完整，並願意遵守本會章程。</span><span class="lang-en">I declare that the information given and any documents attached are true, correct and complete, and I am willing to abide by the Association's Constitution.</span></span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" name="pdpa_ok" data-label="同意收集及使用個人資料" required>
+                <span><span class="lang-zh">本人同意本會依《個人資料保護法》，僅為審核會員資格而收集及使用以上個人資料及所附文件。</span><span class="lang-en">I consent to the Association collecting and using the above personal data and attached documents, in accordance with the Personal Data Protection Act, solely to assess my membership application.</span></span>
+              </label>
+            </fieldset>
+
+            <!-- 機器人陷阱：真人看不到也不會填，被填了的申請會被後端丟掉。請勿刪除 -->
+            <div class="hp" aria-hidden="true"><label>Website <input type="text" id="j-website" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+            <button type="submit" class="submit-btn"><span class="lang-zh">提交申請</span><span class="lang-en">Submit application</span></button>
+            <p class="form-note" id="join-status" role="status" hidden>
+              <span class="lang-zh">正在傳送，請稍候（檔案較大時需要多一點時間）…</span>
+              <span class="lang-en">Sending, please wait (larger files take a little longer)…</span>
+            </p>
+            <p class="form-note">
+              <span class="lang-zh">您的資料只會用於審核入會申請，不作其他用途，並依《個人資料保護法》處理。（<a href="downloads/mmpa-statement.pdf" download>PDF</a>）</span>
+              <span class="lang-en">Your data is used only to assess your membership application and is handled under the Personal Data Protection Act. (<a href="downloads/mmpa-statement.pdf" download>PDF</a>, Chinese only).</span>
+            </p>
+          </form>
+
+          <!-- 提交後出現：成功 → 已送出；失敗 → 改用郵件／複製內容 -->
+          <div class="join-result" id="join-result" hidden tabindex="-1">
+
+            <div id="join-sent" hidden>
+              <h3><span class="lang-zh">申請已送出</span><span class="lang-en">Application submitted</span></h3>
+              <p>
+                <span class="lang-zh">我們已收到您的申請。本會將於 3 個工作日內向您發出收件確認。</span>
+                <span class="lang-en">We have received your application. We will send you an acknowledgement within 3 working days.</span>
+              </p>
+            </div>
+
+            <div id="join-fallback" hidden>
+              <h3><span class="lang-zh">請用電郵寄出申請</span><span class="lang-en">Please send your application by email</span></h3>
+              <p>
+                <span class="lang-zh">暫時無法直接送出。請按「開啟郵件程式」寄出，並<strong>附上身份證明、學歷及工作證明等所需文件副本</strong>。若郵件程式沒有自動帶入內容或出現亂碼，請按「複製內容」後貼到郵件中，寄至 <span class="join-to"></span>。</span>
+                <span class="lang-en">We couldn't submit it directly. Click “Open email app” to send it and <strong>attach copies of the required documents (identity, qualification and employment proof)</strong>. If the text is missing or garbled, use “Copy text” and paste it into an email to <span class="join-to"></span>.</span>
+              </p>
+              <!-- 申請內容太長、無法直接放進郵件連結時才顯示 -->
+              <p class="join-hint" id="join-pasted" hidden>
+                <span class="lang-zh">申請內容較長，已自動複製到剪貼簿。開啟郵件後，請在本文按 Ctrl+V（手機長按）貼上。</span>
+                <span class="lang-en">Your application is long, so it has been copied to the clipboard. After the email opens, paste it into the body (Ctrl+V, or long-press on mobile).</span>
+              </p>
+              <textarea id="join-text" readonly rows="10" aria-label="Application text"></textarea>
+              <div class="join-actions">
+                <a class="btn" id="join-mailto" href="#"><span class="lang-zh">開啟郵件程式</span><span class="lang-en">Open email app</span></a>
+                <button type="button" class="btn btn-outline" id="join-copy"><span class="lang-zh">複製內容</span><span class="lang-en">Copy text</span></button>
+                <span class="join-copied" id="join-copied" role="status" hidden><span class="lang-zh">已複製 ✓</span><span class="lang-en">Copied ✓</span></span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 三、其他申請方式 -->
+        <section class="join-block" id="join-other" aria-labelledby="jn-h-other">
+          <div class="sub-head"><h3 id="jn-h-other"><span class="lang-zh">其他申請方式</span><span class="lang-en">Other ways to apply</span></h3></div>
+          <div class="join-methods">
+            <div class="join-method">
+              <h4><span class="lang-zh">電郵提交</span><span class="lang-en">By email</span></h4>
+              <p>
+                <span class="lang-zh">下載、填妥並簽署申請表，連同所需文件電子檔，電郵至 <a href="mailto:medicalphysics.macau@gmail.com">medicalphysics.macau@gmail.com</a>，主旨請註明「[入會申請] 姓名」。</span>
+                <span class="lang-en">Download, complete and sign the application form, then email it with electronic copies of the required documents to <a href="mailto:medicalphysics.macau@gmail.com">medicalphysics.macau@gmail.com</a>, putting “[Membership application] your name” in the subject line.</span>
+              </p>
+            </div>
+            <div class="join-method">
+              <h4><span class="lang-zh">郵寄</span><span class="lang-en">By post</span></h4>
+              <p>
+                <span class="lang-zh">下載並填寫申請表（按表格要求簽名），連同所需文件副本，郵寄至本會會址：</span>
+                <span class="lang-en">Download and complete the application form (sign as required), then post it with copies of the required documents to the Association's address:</span>
+              </p>
+              <p class="join-address">
+                <span class="lang-zh">澳門醫學物理學會　收</span><span class="lang-en">Macao Medical Physics Association</span><br>
+                <span data-site="address"></span>
+              </p>
+            </div>
+          </div>
+
+          <!-- 申請表下載：檔案放在 downloads/ 資料夾，檔名見 downloads/README.md -->
+          <h4 class="join-h4" id="join-downloads"><span class="lang-zh">下載入會申請表</span><span class="lang-en">Download the application form</span></h4>
+          <div class="download-links">
+            <a class="dl" href="downloads/mmpa-application.pdf" download>PDF</a>
+            <a class="dl" href="downloads/mmpa-application.docx" download>Word</a>
+          </div>
+
+          <!-- 費用及會籍規定（第十一條） -->
+          <details class="join-details" id="join-fees">
+            <summary><span class="lang-zh">費用及會籍規定</span><span class="lang-en">Fee and membership rules</span></summary>
+            <ul>
+              <li><span class="lang-zh">獲批准入會者須在通知發出後 15 天內繳納應繳會費。</span><span class="lang-en">Approved applicants must pay within 15 days of the notice.</span></li>
+              <li><span class="lang-zh">贊助會員須於每年理事會指定期限內繳付年費，不設其他會員類別之年費。</span><span class="lang-en">Sponsoring Members pay the annual fee by the deadline the Board sets each year. Only Sponsoring Members pay an annual fee.</span></li>
+            </ul>
+          </details>
+        </section>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-about">
+        <p class="footer-name"><span class="lang-zh">澳門醫學物理學會</span><span class="lang-en">Macao Medical Physics Association</span></p>
+        <!-- 會址在 script.js 最上方的 SITE.address 統一設定（目前為虛擬地址） -->
+        <p class="footer-line"><span class="lang-zh">會址：</span><span class="lang-en">Address: </span><span data-site="address"></span></p>
+        <p class="footer-line"><span class="lang-zh">電郵：</span><span class="lang-en">Email: </span><a href="mailto:medicalphysics.macau@gmail.com">medicalphysics.macau@gmail.com</a></p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="join.html"><span class="lang-zh">入會申請</span><span class="lang-en">Membership</span></a>
+        <a href="publications.html"><span class="lang-zh">出版刊物</span><span class="lang-en">Publications</span></a>
+        <a href="contact.html"><span class="lang-zh">聯絡我們</span><span class="lang-en">Contact</span></a>
+        <a href="https://www.facebook.com/profile.php?id=61595477795837" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      <span><span class="lang-zh">© 2026 澳門醫學物理學會。保留所有權利。</span><span class="lang-en">© 2026 Macao Medical Physics Association. All rights reserved.</span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="news-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

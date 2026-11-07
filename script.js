@@ -1,8 +1,8 @@
 /* ============================================================
    學會網站 — 共用腳本 / Shared script
    語言切換、手機選單、站內搜尋、首頁輪播、關於我們分頁籤、
-   新聞列表與分頁、聯絡表單。各功能只在頁面上有對應元素時才啟動。
-   需先載入 news-data.js（window.MMPA_NEWS）。
+   新聞列表與分頁、出版刊物、入會申請表、聯絡表單。各功能只在頁面上有對應元素時才啟動。
+   需先載入 news-data.js（window.MMPA_NEWS）；出版刊物頁另需 publications-data.js（window.MMPA_PUBS）。
    ============================================================ */
 (function () {
   'use strict';
@@ -25,6 +25,21 @@
   function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 
   root.classList.add('js');
+
+  /* ---------- 學會基本資料 ----------
+     全站所有 data-site="address" 的位置（頁尾、聯絡頁、入會申請頁的郵寄地址）都會自動套用這裡的內容。 */
+  var SITE = {
+    address: {
+      zh: '澳門羅利老馬路3號地下',
+      en: 'Shop B, G/F, 3 Estrada de Adolfo Loureiro, Costa, Macao'
+    }
+  };
+  function initSite() {
+    $$('[data-site]').forEach(function (el) {
+      var v = SITE[el.getAttribute('data-site')];
+      if (v) el.innerHTML = bi(v);
+    });
+  }
 
   /* ---------- 語言切換 ---------- */
   function setLang(l) {
@@ -102,6 +117,11 @@
   function hasReview(n) {
     return !!(n.album && n.album.length) && n.date < today();
   }
+  // 活動預告／報名消息（event: true）：活動日期已過（不含當天）→ 顯示「已結束」
+  function endedTagHTML(n) {
+    if (!(n.event && n.date < today())) return '';
+    return '<span class="ended-tag">' + bi({ zh: '已結束', en: 'Ended' }) + '</span>';
+  }
   function reviewTagHTML(n) {
     if (!hasReview(n)) return '';
     return '<a class="review-tag" href="' + esc(n.url) + '#album">' + CAMERA + bi({ zh: '回顧', en: 'Review' }) + '</a>';
@@ -117,7 +137,7 @@
     }
     return '<article class="news-item' + (withThumb ? ' has-thumb' : '') + '">' +
       '<div class="news-body">' +
-        '<div class="news-meta"><span class="news-date">' + esc(n.date) + '</span>' + reviewTagHTML(n) + '</div>' +
+        '<div class="news-meta"><span class="news-date">' + esc(n.date) + '</span>' + endedTagHTML(n) + reviewTagHTML(n) + '</div>' +
         '<a class="news-link" href="' + esc(n.url) + '"><h3>' + bi(n.title) + '</h3></a>' +
         '<p>' + bi(n.summary) + '</p>' +
       '</div>' + thumb +
@@ -318,20 +338,53 @@
     });
   }
 
+  /* ---------- 出版刊物 ----------
+     publications.html 有 <div id="pub-grid"> 時才啟動；資料來自 publications-data.js，
+     依期號由新到舊。點擊封面在新分頁開啟該期 PDF。 */
+  function pubCardHTML(p) {
+    var issue = bi({ zh: '第 ' + p.issue + ' 期', en: 'Issue ' + p.issue });
+    return '<a class="pub-card" href="' + esc(p.pdf) + '" target="_blank" rel="noopener">' +
+      '<span class="pub-cover ph"><span class="ph-label">' + issue + '</span>' +
+        (p.cover ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy" data-fallback>' : '') +
+      '</span>' +
+      '<span class="pub-info">' +
+        '<span class="pub-issue">' + issue + '</span>' +
+        '<span class="pub-title">' + bi(p.title) + '</span>' +
+        (p.date ? '<span class="pub-date">' + esc(p.date) + '</span>' : '') +
+        '<span class="pub-pdf">PDF ↗</span>' +
+      '</span></a>';
+  }
+
+  function initPubs() {
+    var grid = $('#pub-grid');
+    if (!grid) return;
+    var list = (window.MMPA_PUBS || []).slice().sort(function (a, b) {
+      return (b.issue || 0) - (a.issue || 0);
+    });
+    grid.innerHTML = list.length
+      ? list.map(pubCardHTML).join('')
+      : '<p>' + bi({ zh: '暫無刊物。', en: 'No publications yet.' }) + '</p>';
+    initImages(grid);
+  }
+
   /* ---------- 站內搜尋 ---------- */
   // 靜態網站沒有後端，所以用一份頁面清單比對標題與關鍵字。
   var PAGES = [
     { zh: '首頁', en: 'Home', url: 'index.html', kw: '學會 格言 格物致知 mmpa' },
     { zh: '本會簡介', en: 'About the Association', url: 'about.html#intro',
       kw: '關於我們 簡介 歷史 成立宗旨 發展目標 主要會務 服務範圍 about mission history goals activities' },
-    { zh: '入會申請', en: 'Membership application', url: 'about.html#join',
-      kw: '入會 申請 加入會員 會員 個人會員 準會員 贊助會員 入會費 年費 membership join apply member' },
-    { zh: '行政架構', en: 'Organization', url: 'about.html#structure',
-      kw: '組織架構 成員 會員大會 主席團 理事會 監事會 會長 副會長 秘書長 理事長 監事長 ' +
+    { zh: '入會申請', en: 'Membership application', url: 'join.html',
+      kw: '入會 申請 加入會員 會員 個人會員 準會員 贊助會員 入會費 年費 申請表 下載 電郵 郵寄 會址 membership join apply member form download' },
+    { zh: '學會章程（PDF）', en: 'Constitution (PDF)', url: 'downloads/mmpa-constitution-zh.pdf',
+      kw: '章程 會章 條文 下載 constitution bylaws download' },
+    { zh: '組織架構', en: 'Structure', url: 'about.html#structure',
+      kw: '行政架構 組織架構 成員 會員大會 主席團 理事會 監事會 會長 副會長 秘書長 理事長 監事長 ' +
           '李敏兒 廖偉霆 許正妍 李嘉浩 李凱彤 張浩澄 周雯 陳欣如 梁志強 麥敬樂 鄧穎 ' +
           'board directors supervisory general assembly members' },
     { zh: '最新消息', en: 'News', url: 'news.html', kw: '消息 活動 公告 news events' },
-    { zh: '聯絡我們', en: 'Contact', url: 'contact.html', kw: '電郵 電話 email phone 查詢 contact' }
+    { zh: '出版刊物', en: 'Publications', url: 'publications.html',
+      kw: '追光 會刊 刊物 期刊 出版 下載 zhui guang newsletter magazine publications' },
+    { zh: '聯絡我們', en: 'Contact', url: 'contact.html', kw: '電郵 電話 會址 地址 email phone address 查詢 contact' }
   ];
 
   function initSearch() {
@@ -454,7 +507,7 @@
     start();
   }
 
-  /* ---------- 關於我們：分頁籤（網址 #intro / #constitution / #structure）---------- */
+  /* ---------- 關於我們：分頁籤（網址 #intro / #structure；舊連結 #join 會轉到 join.html）---------- */
   function initTabs() {
     var tabs = $$('.tabs [role="tab"]');
     if (!tabs.length) return;
@@ -496,6 +549,7 @@
 
     function fromHash() {
       var h = location.hash.replace('#', '');
+      if (h === 'join') { location.replace('join.html'); return; }
       show(h);
       if (h && names.indexOf(h) !== -1) {
         var bar = $('.tabs');
@@ -512,7 +566,7 @@
      網頁會自動退回「開啟郵件程式」的備援做法。 */
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgLygZ2GiQXNIVM0xh2W-e0rgJ1jM_vQpPZ_amVonlFK95TClo1rHtCsjKrpaqTwzc-A/exec';
   var PAGE_START = Date.now();                                              // 用來辨識「填太快」的機器人
-  var MAX_FILES = 3;
+  var MAX_FILES = 5;                                                        // 與 Code.gs、join.html 的說明文字一致
   var MAX_FILE_BYTES = 5 * 1024 * 1024;                                     // 與 Code.gs 的上限一致
   var FILE_MIME = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png' };
 
@@ -585,6 +639,9 @@
         if (g.tagName === 'FIELDSET') g.disabled = !on;
         $$('input, select, textarea', g).forEach(function (c) { c.disabled = !on; });
       });
+      $$('[data-required-for]', form).forEach(function (c) {
+        c.required = !c.disabled && c.getAttribute('data-required-for').split(' ').indexOf(t) !== -1;
+      });
       checkExp();
     }
     function checkExp() {
@@ -655,7 +712,7 @@
 
     // 寄送失敗（或還沒設定網址）時的備援：整理成郵件內容，由使用者自己寄出
     function showFallback(body, subject) {
-      body += '\n（附件：學歷及工作證明副本，請於郵件中附上）';
+      body += '\n（附件：身份證明、學歷及工作證明等所需文件副本，請於郵件中附上）';
       text.value = body;
       var href = 'mailto:' + JOIN_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       var pasted = $('#join-pasted');
@@ -697,7 +754,11 @@
           if (sentBox) sentBox.hidden = false;
           if (fallbackBox) fallbackBox.hidden = true;
         })
-        .catch(function () { showFallback(body, subject); })
+        .catch(function (err) {
+          console.error('入會申請送出失敗：', err);
+          alert('DEBUG：' + (err && err.message ? err.message : err));
+          showFallback(body, subject);
+        })
         .then(function () {
           btn.disabled = false;
           if (status) status.hidden = true;
@@ -777,12 +838,14 @@
 
   /* ---------- 啟動 ---------- */
   function init() {
+    initSite();
     initLang();
     initNav();
     initImages();
     initHomeNews();
     initNewsPage();
     initEventPage();
+    initPubs();
     initSearch();
     initCarousel();
     initTabs();

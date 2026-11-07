@@ -254,6 +254,25 @@ html[data-lang="en"] p.lang-en { display: block; }
 .subnav a:hover,
 .subnav a:focus-visible { background: rgba(255,255,255,0.08); color: var(--mint); }
 
+/* 入會申請按鈕：薄荷綠實心，永遠可見 */
+.join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 16px;
+  background: var(--mint);
+  color: var(--navy);
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.join-btn:hover { background: #fff; color: var(--navy); }
+.site-header a.join-btn:focus-visible { outline-color: #fff; }
+
 .nav-toggle {
   display: none;
   background: transparent;
@@ -266,6 +285,7 @@ html[data-lang="en"] p.lang-en { display: block; }
 @media (max-width: 760px) {
   .header-inner { flex-wrap: wrap; }
   .logo { flex: 1; margin-right: 0; min-width: 0; font-size: 0.98rem; }
+  .join-btn { order: 1; padding: 0 12px; font-size: 0.85rem; }
   .nav-toggle { display: block; order: 2; }
   .header-tools { order: 3; width: 100%; }
   .site-search { flex: 1; }
@@ -635,6 +655,19 @@ html:not(.js) .carousel-dots { display: none; }
 .review-tag svg { width: 13px; height: 13px; }
 .review-tag:hover { background: var(--teal); color: #fff; }
 
+/* 「已結束」標籤：活動預告／報名消息在活動日期之後自動出現 */
+.ended-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid #8a93a8;
+  border-radius: 999px;
+  color: #6b7490;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
 .news-thumb {
   align-self: start;
   border: 1px solid var(--line);
@@ -793,9 +826,10 @@ body.no-scroll { overflow: hidden; }
 .contact-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
 .contact-logo {
   width: 400px;
+  max-width: 100%;
   height: 130px;
   padding: 8px;
-  flex-shrink: 0;
+  flex-shrink: 1;
   border-radius: var(--radius);
 }
 .contact-logo img { width: 100%; height: 100%; object-fit: contain; }
@@ -867,13 +901,30 @@ body.no-scroll { overflow: hidden; }
   padding: 32px 0;
   font-size: 0.85rem;
 }
-.site-footer .wrap {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
 .site-footer a { color: rgba(255,255,255,0.75); }
+.site-footer a:hover { color: var(--mint); }
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  padding-bottom: 22px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line-dark);
+}
+.footer-name {
+  font-family: var(--font-head-zh), var(--font-head-en);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.footer-line { margin: 0 0 4px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 22px; align-content: flex-start; }
+.footer-links a { text-decoration: none; }
+.footer-copy { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 640px) {
+  .footer-main { grid-template-columns: 1fr; gap: 20px; }
+}
 
 /* 減少動態效果偏好 / Reduced motion -------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
@@ -1025,3 +1076,217 @@ button.btn-outline { border: 1px solid var(--navy); }
 /* 機器人陷阱欄位：移出畫面（不用 display:none，部分機器人會略過隱藏欄位）*/
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .join-form input[type="file"] { padding: 8px; background: #fff; }
+
+/* 入會申請頁：章程、申請方式、申請表下載 ---------------------------------- */
+#join-downloads,
+#join-form-section { scroll-margin-top: 130px; }
+
+.doc-link { margin: 0 0 8px; }
+.doc-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teal);
+  padding: 14px 20px;
+  margin: 16px 0 8px;
+}
+.doc-bar p { margin: 0; color: #45506b; font-size: 0.92rem; }
+
+.join-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.join-method {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--mint);
+  padding: 18px 20px 20px;
+}
+.join-method h4 { margin: 0 0 8px; font-size: 1.05rem; color: var(--navy); }
+.join-method p { font-size: 0.92rem; color: #45506b; margin-bottom: 0.8em; }
+.join-method .btn { margin-top: auto; }
+.join-address {
+  padding: 8px 12px;
+  background: var(--paper);
+  border-left: 3px solid var(--teal);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.download-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 16px 20px;
+}
+.download-card h4 { margin: 0 0 10px; font-size: 1rem; color: var(--navy); }
+.download-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.dl {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid var(--navy);
+  border-radius: var(--radius);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.dl:hover { background: var(--navy); color: #fff; }
+
+/* 入會申請頁：2026-11 改版新增 -------------------------------------------
+   只新增、不改動上面任何既有規則，其他頁（首頁、聯絡頁等）不受影響。
+   整段刪掉 → 版面退回舊樣式（join.html 新增的 class 會失去樣式）。 */
+#join-types,
+#join-documents,
+#join-fees,
+#join-other { scroll-margin-top: 130px; }
+
+.join-block { margin-top: 56px; }
+.join-block:first-child { margin-top: 0; }
+
+/* 頁內小標題（h4）：既有 .join-type / .join-method 內的 h4 有自己的樣式，這個給其餘 h4 用 */
+.join-h4 {
+  font-family: var(--font-head-zh), var(--font-head-en);
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 32px 0 12px;
+}
+
+/* 會員卡：入會費 */
+.join-type .join-fee { margin: 0 0 4px; color: var(--navy); font-weight: 700; }
+.join-type .join-fee b { font-size: 1.2rem; color: var(--purple); }
+
+/* 申請前請準備 */
+.join-prep {
+  margin-top: 28px;
+  padding: 6px 20px 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teal);
+}
+.join-prep .join-h4 { margin-top: 12px; }
+.join-prep ul { padding-left: 1.2em; margin: 0 0 0.8em; }
+.join-prep li { margin-bottom: 0.3em; }
+
+/* 內文連結：全站的青色 (#0197AF) 在白底只有約 3.5:1，達不到 4.5:1，
+   所以入會頁的文字連結改用紫色（約 11:1）。按鈕（.btn、.dl）不受影響。 */
+.join a:not(.btn):not(.dl) { color: var(--purple); text-underline-offset: 2px; }
+.join a:not(.btn):not(.dl):hover { color: var(--navy); }
+
+/* 表單 ----------------------------------------------------------------- */
+.join-form { --edge: #7a849b; }  /* 輸入框邊線：對白底約 3.7:1（--line 太淡，不到 3:1） */
+.join-form .field input,
+.join-form .field select,
+.join-form .field textarea { border-color: var(--edge); }
+.join-form ::placeholder { color: #6b7490; opacity: 1; }
+
+.form-note .req { color: #b3261e; font-weight: 700; }
+.field .form-note { margin-top: 6px; }
+
+/* 欄位組內的小標題（例如「學歷」「現職及工作經歷」） */
+.join-sub { margin: 4px 0 14px; font-weight: 700; color: var(--navy); }
+.field + .join-sub,
+.form-row + .join-sub { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+
+/* 會員類別：橫排選項卡 */
+.choice-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.choice-group .choice {
+  margin: 0;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+}
+.choice-group .choice:has(input:checked) { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); background: rgba(1, 151, 175, 0.06); }
+.choice-group .choice:has(input:focus-visible) { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+/* 必填勾選項（聲明）也標星號 */
+.join-form .choice:has(> input[type="checkbox"][required]) > span::after { content: " *"; color: #b3261e; }
+
+/* 驗證提示：使用者操作過、且內容不符時才出現（:user-invalid），不影響 JS */
+.join-form .field input:user-invalid,
+.join-form .field select:user-invalid,
+.join-form .field textarea:user-invalid { border-color: #b3261e; }
+.join-form .field:has(:user-invalid)::after {
+  content: "請檢查此欄位";
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #b3261e;
+}
+html[data-lang="en"] .join-form .field:has(:user-invalid)::after { content: "Please check this field"; }
+
+/* 提交按鈕：全寬、有 focus / disabled 狀態（只作用在入會表單，聯絡表單的按鈕維持原樣） */
+.join-form .submit-btn { display: block; width: 100%; padding: 14px 22px; font-size: 1.05rem; }
+.join-form .submit-btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.join-form .submit-btn:disabled,
+.join-form .submit-btn:disabled:hover { background: #8a93a8; cursor: not-allowed; }
+
+/* 費用及會籍規定（可展開） */
+.join-details {
+  margin-top: 32px;
+  padding: 0 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.join-details summary { padding: 14px 0; font-weight: 700; color: var(--navy); cursor: pointer; }
+.join-details summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.join-details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+.join-details ul { padding-left: 1.2em; margin: 0 0 12px; font-size: 0.92rem; color: #45506b; }
+.join-details li { margin-bottom: 0.5em; }
+
+/* 出版刊物 / Publications ------------------------------------------------ */
+.pub-lead { max-width: 46em; color: #45506b; margin-bottom: 28px; }
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 32px 24px;
+}
+@media (max-width: 560px) {
+  .pub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 14px; }
+}
+.pub-card { display: block; text-decoration: none; color: var(--ink); }
+.pub-cover {
+  aspect-ratio: 210 / 297;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(2, 21, 61, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pub-card:hover .pub-cover,
+.pub-card:focus-visible .pub-cover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(2, 21, 61, 0.18);
+}
+.pub-info { display: block; margin-top: 12px; }
+.pub-issue { display: block; font-weight: 700; color: var(--teal); font-size: 0.85rem; }
+.pub-title {
+  display: block;
+  margin: 2px 0;
+  font-family: var(--font-head-zh), var(--font-head-en);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--navy);
+}
+.pub-card:hover .pub-title { color: var(--purple); }
+.pub-date { display: block; font-family: var(--font-body-en); font-size: 0.82rem; color: #6b7490; }
+.pub-pdf { display: inline-block; margin-top: 4px; font-size: 0.82rem; font-weight: 600; color: var(--teal); }
+@media (prefers-reduced-motion: reduce) {
+  .pub-cover { transition: none; }
+  .pub-card:hover .pub-cover { transform: none; }
+}

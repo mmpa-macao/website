@@ -12,6 +12,7 @@
               連到該活動頁底部的相冊；活動日期之前即使有填，也不會顯示。
             · 回顧稿（review: true）：相冊直接顯示，不受日期限制，列表上也不加「回顧」標籤。
             沒有相片就整個不要寫 album。
+   event    （選填）true = 這是「活動預告／報名」消息；活動日期一過，列表上會自動加上「已結束」標籤。
    review   （選填）true = 這則是「活動回顧」獨立消息（活動結束後另外發佈）。
    ============================================================ */
 window.MMPA_NEWS = [
@@ -47,14 +48,15 @@ window.MMPA_NEWS = [
   {
     date: '2026.09.20',
     url: 'news-20260920.html',
+    event: true,
     poster: 'images/news/20260920_poster.jpg',
     title: {
       zh: '澳門醫學物理學會成立典禮',
-      en: 'Inauguration Ceremony of the Macau Medical Physics Association'
+      en: 'Inauguration Ceremony of the Macao Medical Physics Association'
     },
     summary: {
       zh: '澳門醫學物理學會於 2024 年 9 月 19 日登記成立，謹訂於 2026 年 9 月 20 日（星期日）下午三時假澳門旅遊塔會議中心舉行成立典禮，特邀北京、澳門及香港三地專家學者及相關專業學會代表出席。',
-      en: 'Registered on 19 September 2024, the Association holds its inaugural ceremony on Sunday, 20 September 2026 at 3:00 PM at the Macau Tower Convention Centre, with invited experts and society representatives from Beijing, Macau and Hong Kong.'
+      en: 'Registered on 19 September 2024, the Association holds its inaugural ceremony on Sunday, 20 September 2026 at 3:00 PM at the Macau Tower Convention Centre, with invited experts and society representatives from Beijing, Macao and Hong Kong.'
     }
   }
 ];
